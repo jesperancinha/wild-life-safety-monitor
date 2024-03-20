@@ -26,3 +26,12 @@ replay_pid*
 # Intellij
 *.iml
 .idea
+build
+target
+
+
+# Node
+node_modules
+
+# Gradle
+.gradle
