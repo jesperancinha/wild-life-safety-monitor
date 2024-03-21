@@ -36,3 +36,7 @@ For simplicity, and for this demo, the only CRUD functions it provides is to alt
 
 The GUI will allow realtime view of sensor and calculated data.
 It will also allow the editing and change of identifiable animal data.
+
+## About me
+
+[![GitHub followers](https://img.shields.io/github/followers/jesperancinha.svg?label=Jesperancinha&style=for-the-badge&logo=github&color=grey "GitHub")](https://github.com/jesperancinha)
