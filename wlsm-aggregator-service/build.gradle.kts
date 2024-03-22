@@ -11,6 +11,10 @@ java {
 	sourceCompatibility = JavaVersion.VERSION_21
 }
 
+tasks.bootJar {
+	archiveFileName.set("wlsm-aggregator-service.jar")
+}
+
 repositories {
 	mavenCentral()
 }
