@@ -59,6 +59,10 @@ kubectl delete node --all
 kubectl delete service --all
 ```
 
+```shell
+kubectl get pods --all-namespaces
+```
+
 ## About me
 
 [![GitHub followers](https://img.shields.io/github/followers/jesperancinha.svg?label=Jesperancinha&style=for-the-badge&logo=github&color=grey "GitHub")](https://github.com/jesperancinha)

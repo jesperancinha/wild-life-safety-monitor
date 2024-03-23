@@ -25,6 +25,11 @@ build-gradle:
 		make b; \
 		cd $$CURRENT; \
 	done
+stop-registry:
+	docker stop registry
+remove-registry:
+	docker rm registry
+stop-remove-registry: stop-registry remove-registry
 start-kubernetes:
 	docker run -d -p 5000:5000 --restart=always --name registry registry:2
 	cd wlsm-aggregator-service; \
@@ -33,6 +38,10 @@ start-kubernetes:
 	docker pull localhost:5000/wlsm-aggregator-service;
 create-cluster:
 	kind create cluster --name=wlsm-mesh-zone
+	kubectl cluster-info --context kind-wlsm-mesh-zone
 k8s-apply-deployment:
 	kubectl apply -f deployment.yaml
-
+k8s-tear-down:
+	kubectl delete -f deployment.yaml
+logs:
+	kubectl get pods --all-namespaces

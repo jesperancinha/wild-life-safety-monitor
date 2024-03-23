@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: my-deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: my-app
@@ -14,6 +14,7 @@ spec:
     spec:
       containers:
         - name: my-container
-          image: localhost:5000/wlsm-aggregator-service
+          image: localhost:5000/wlsm-aggregator-service:latest
+          imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 80
+            - containerPort: 8080
