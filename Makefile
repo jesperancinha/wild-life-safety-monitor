@@ -31,7 +31,6 @@ remove-registry:
 	docker rm registry
 stop-remove-registry: stop-registry remove-registry
 start-kubernetes:
-	docker run -d -p 5000:5000 --restart=always --name registry registry:2
 	cd wlsm-aggregator-service; \
 	docker build . --tag localhost:5000/wlsm-aggregator-service; \
 	docker push localhost:5000/wlsm-aggregator-service; \
@@ -39,9 +38,20 @@ start-kubernetes:
 create-cluster:
 	kind create cluster --name=wlsm-mesh-zone
 	kubectl cluster-info --context kind-wlsm-mesh-zone
-k8s-apply-deployment:
-	kubectl apply -f deployment.yaml
+k8s-apply-registry-deployment:
+	kubectl apply -f registry-deployment.yaml
+k8s-apply-deployment: start-kubernetes
+	kubectl apply -f aggregator-deployment.yaml
 k8s-tear-down:
-	kubectl delete -f deployment.yaml
+	kubectl delete -f registry-deployment.yaml
+	kubectl delete -f aggregator-deployment.yaml
 logs:
 	kubectl get pods --all-namespaces
+redirect-ports:
+	kubectl port-forward svc/wlsm -n default 5000:5000
+
+# Just for tests
+
+# Starts the registry locally. This is not important for the project
+start-registry:
+	docker run -d -p 5000:5000 --restart=always --name registry registry:2
