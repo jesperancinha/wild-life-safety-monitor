@@ -7,6 +7,12 @@ MODULE_LOCATIONS := wlsm-aggregator-service \
 
 install-all:
 	sudo npm install -g @angular/cli
+	sudo apt-get install -y apt-transport-https ca-certificates curl gpg
+	curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+	echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+	sudo apt-get update
+	sudo apt-get install -y kubelet kubeadm kubectl
+	sudo apt-mark hold kubelet kubeadm kubectl
 b: build
 build: build-gradle
 build-gradle:
@@ -21,3 +27,12 @@ build-gradle:
 	done
 start-kubernetes:
 	docker run -d -p 5000:5000 --restart=always --name registry registry:2
+	cd wlsm-aggregator-service; \
+	docker build . --tag localhost:5000/wlsm-aggregator-service; \
+	docker push localhost:5000/wlsm-aggregator-service; \
+	docker pull localhost:5000/wlsm-aggregator-service;
+create-cluster:
+	kind create cluster --name=wlsm-mesh-zone
+k8s-apply-deployment:
+	kubectl apply -f deployment.yaml
+

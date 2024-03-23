@@ -37,6 +37,28 @@ For simplicity, and for this demo, the only CRUD functions it provides is to alt
 The GUI will allow realtime view of sensor and calculated data.
 It will also allow the editing and change of identifiable animal data.
 
+## K8s Analysis
+
+```shell
+kubectl config get-contexts
+kubectl config current-context
+kubectl config view-context <context-name>
+```
+
+```shell
+kubectl delete deployment --all
+kubectl delete statefulset --all
+kubectl delete pod --all
+kubectl delete persistentvolume --all
+kubectl delete persistentvolumeclaim --all
+kubectl delete node --all
+
+```
+
+```shell
+kubectl delete service --all
+```
+
 ## About me
 
 [![GitHub followers](https://img.shields.io/github/followers/jesperancinha.svg?label=Jesperancinha&style=for-the-badge&logo=github&color=grey "GitHub")](https://github.com/jesperancinha)
