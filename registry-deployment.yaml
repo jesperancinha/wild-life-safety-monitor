@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wlsm
+  name: wlsm-registry
 spec:
   replicas: 1
   selector:
@@ -22,7 +22,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: wlsm
+  name: wlsm-registry
 spec:
   selector:
     app: registry
@@ -30,3 +30,4 @@ spec:
     - protocol: TCP
       appProtocol: http
       port: 5000
+      targetPort: 5000

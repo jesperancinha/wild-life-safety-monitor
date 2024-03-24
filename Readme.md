@@ -63,6 +63,34 @@ kubectl delete service --all
 kubectl get pods --all-namespaces
 ```
 
+## How to start
+
+* Install kubectl, kubeadm, kubelet and kind
+* Create cluster
+
+```shell
+make install-all
+```
+
+* Start registry pods
+
+```shell
+make k8s-apply-registry-deployment
+make redirect-ports
+```
+
+or
+
+```shell
+make k8s-init-start
+```
+
+* Run all pods
+
+```shell
+make k8s-apply-deployment
+```
+
 ## About me
 
 [![GitHub followers](https://img.shields.io/github/followers/jesperancinha.svg?label=Jesperancinha&style=for-the-badge&logo=github&color=grey "GitHub")](https://github.com/jesperancinha)

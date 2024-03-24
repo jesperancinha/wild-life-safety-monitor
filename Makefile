@@ -42,13 +42,18 @@ k8s-apply-registry-deployment:
 	kubectl apply -f registry-deployment.yaml
 k8s-apply-deployment: start-kubernetes
 	kubectl apply -f aggregator-deployment.yaml
-k8s-tear-down:
-	kubectl delete -f registry-deployment.yaml
+k8s-tear-aggregator-down:
 	kubectl delete -f aggregator-deployment.yaml
+k8s-tear-registry-down:
+	kubectl delete -f registry-deployment.yaml
+k8s-tear-down: k8s-tear-aggregator-down k8s-tear-registry-down
 logs:
 	kubectl get pods --all-namespaces
 redirect-ports:
-	kubectl port-forward svc/wlsm -n default 5000:5000
+	kubectl port-forward svc/wlsm-registry -n default 5000:5000
+k8s-init-start: k8s-apply-registry-deployment redirect-ports
+k8s-aggregator-shell:
+	kubectl exec --stdin --tty wlsm-aggregator-deployment -- /bin/bash
 
 # Just for tests
 
