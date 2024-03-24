@@ -30,7 +30,7 @@ stop-registry:
 remove-registry:
 	docker rm registry
 stop-remove-registry: stop-registry remove-registry
-start-kubernetes:
+create-and-push-images:
 	cd wlsm-aggregator-service; \
 	docker build . --tag localhost:5000/wlsm-aggregator-service; \
 	docker push localhost:5000/wlsm-aggregator-service; \
@@ -42,7 +42,7 @@ k8s-apply-ubuntu-deployment:
 	kubectl apply -f ubuntu.yaml
 k8s-apply-registry-deployment:
 	kubectl apply -f registry-deployment.yaml
-k8s-apply-deployment: start-kubernetes
+k8s-apply-deployment: create-and-push-images
 	kubectl apply -f aggregator-deployment.yaml
 k8s-tear-aggregator-down:
 	kubectl delete -f aggregator-deployment.yaml
@@ -53,6 +53,7 @@ k8s-tear-ubuntu-down:
 k8s-tear-down: k8s-tear-aggregator-down k8s-tear-registry-down k8s-tear-ubuntu-down
 logs:
 	kubectl get pods --all-namespaces
+	kubectl get svc
 redirect-ports:
 	kubectl port-forward svc/wlsm-registry -n default 5000:5000
 k8s-init-start: k8s-apply-registry-deployment redirect-ports
@@ -63,4 +64,7 @@ k8s-ubuntu-shell:
 
 # Starts the registry locally. This is not important for the project
 start-registry:
+	docker ps -a --format '{{.ID}}' -q --filter="name=registry" | xargs -I {}  docker stop {}
+	docker ps -a --format '{{.ID}}' -q --filter="name=registry" | xargs -I {}  docker rm {}
 	docker run -d -p 5000:5000 --restart=always --name registry registry:2
+create-local-registry: start-registry create-and-push-images
