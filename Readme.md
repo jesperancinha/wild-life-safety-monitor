@@ -91,6 +91,40 @@ make k8s-init-start
 make k8s-apply-deployment
 ```
 
+## Fixes
+
+1. Install Docker in Alpine container
+
+```shell
+apk add --update docker openrc
+service docker start
+mkdir /run/openrc
+touch /run/openrc/softlevel
+```
+2. Install Docker in Ubuntu container
+
+```shell
+apt-get update
+apt-get install ca-certificates curl
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+chmod a+r /etc/apt/keyrings/docker.asc
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+tee /etc/apt/sources.list.d/docker.list > /dev/null
+apt-get update
+apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin vim
+chown root:docker /var/run/docker.sock
+```
+
+
+###### From https://forums.docker.com/t/etc-init-d-docker-62-ulimit-error-setting-limit-invalid-argument-problem/139424:
+
+```text
+Line 62 of the /etc/init.d/docker file has "ulimit -Hn 524288". Remove the H.
+```
+ 
 ## About me
 
 [![GitHub followers](https://img.shields.io/github/followers/jesperancinha.svg?label=Jesperancinha&style=for-the-badge&logo=github&color=grey "GitHub")](https://github.com/jesperancinha)

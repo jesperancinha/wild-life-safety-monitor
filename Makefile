@@ -38,6 +38,8 @@ start-kubernetes:
 create-cluster:
 	kind create cluster --name=wlsm-mesh-zone
 	kubectl cluster-info --context kind-wlsm-mesh-zone
+k8s-apply-ubuntu-deployment:
+	kubectl apply -f ubuntu.yaml
 k8s-apply-registry-deployment:
 	kubectl apply -f registry-deployment.yaml
 k8s-apply-deployment: start-kubernetes
@@ -46,14 +48,16 @@ k8s-tear-aggregator-down:
 	kubectl delete -f aggregator-deployment.yaml
 k8s-tear-registry-down:
 	kubectl delete -f registry-deployment.yaml
-k8s-tear-down: k8s-tear-aggregator-down k8s-tear-registry-down
+k8s-tear-ubuntu-down:
+	kubectl delete -f ubuntu.yaml
+k8s-tear-down: k8s-tear-aggregator-down k8s-tear-registry-down k8s-tear-ubuntu-down
 logs:
 	kubectl get pods --all-namespaces
 redirect-ports:
 	kubectl port-forward svc/wlsm-registry -n default 5000:5000
 k8s-init-start: k8s-apply-registry-deployment redirect-ports
-k8s-aggregator-shell:
-	kubectl exec --stdin --tty wlsm-aggregator-deployment -- /bin/bash
+k8s-ubuntu-shell:
+	kubectl exec --stdin --tty ubuntu  -- /bin/bash
 
 # Just for tests
 
