@@ -25,46 +25,51 @@ build-gradle:
 		make b; \
 		cd $$CURRENT; \
 	done
+create-local-registry:
+	./registry-service.yaml
+init: create-cluster create-local-registry k8s-apply-deployment
+create-and-push-images:
+	cd wlsm-aggregator-service; \
+	docker build . --tag localhost:5001/wlsm-aggregator-service; \
+	docker push localhost:5001/wlsm-aggregator-service; \
+	docker pull localhost:5001/wlsm-aggregator-service;
+create-cluster:
+	kind create cluster --name=wlsm-mesh-zone
+	kubectl cluster-info --context kind-wlsm-mesh-zone
+logs:
+	kubectl get pods --all-namespaces
+	kubectl get svc
+k8s-apply-deployment: create-and-push-images
+	kubectl apply -f aggregator-deployment.yaml
+k8s-tear-aggregator-down:
+	kubectl delete -f aggregator-deployment.yaml
+k8s-tear-down: k8s-tear-aggregator-down
+k8s-ubuntu-shell:
+	kubectl exec --stdin --tty ubuntu  -- /bin/bash
+
+# This is a set of different scripts used to try, create and test this project.
+# They are not. however in use anymore for the project
+k8s-init-start: k8s-apply-registry-deployment redirect-ports
+create-local-registry: start-registry create-and-push-images
+k8s-apply-ubuntu-deployment:
+	kubectl apply -f ubuntu.yaml
+k8s-apply-registry-deployment:
+	kubectl apply -f registry-deployment.yaml
+k8s-tear-registry-down:
+	kubectl delete -f registry-deployment.yaml
+	kubectl delete -f registry-service.yaml
+k8s-tear-ubuntu-down:
+	kubectl delete -f ubuntu.yaml
+k8s-tear-all-down: k8s-tear-aggregator-down k8s-tear-registry-down k8s-tear-ubuntu-down
+redirect-ports:
+	kubectl port-forward svc/wlsm-registry -n default 5000:5000
+remove-registry:
+	docker ps -a --format '{{.ID}}' -q --filter="name=registry" | xargs -I {}  docker stop {}
+	docker ps -a --format '{{.ID}}' -q --filter="name=registry" | xargs -I {}  docker rm {}
+start-registry: remove-registry
+	docker run -d -p 5000:5000 --restart=always --name registry registry:2
 stop-registry:
 	docker stop registry
 remove-registry:
 	docker rm registry
 stop-remove-registry: stop-registry remove-registry
-create-and-push-images:
-	cd wlsm-aggregator-service; \
-	docker build . --tag localhost:5000/wlsm-aggregator-service; \
-	docker push localhost:5000/wlsm-aggregator-service; \
-	docker pull localhost:5000/wlsm-aggregator-service;
-create-cluster:
-	kind create cluster --name=wlsm-mesh-zone
-	kubectl cluster-info --context kind-wlsm-mesh-zone
-k8s-apply-ubuntu-deployment:
-	kubectl apply -f ubuntu.yaml
-k8s-apply-registry-deployment:
-	kubectl apply -f registry-deployment.yaml
-k8s-apply-deployment: create-and-push-images
-	kubectl apply -f aggregator-deployment.yaml
-k8s-tear-aggregator-down:
-	kubectl delete -f aggregator-deployment.yaml
-k8s-tear-registry-down:
-	kubectl delete -f registry-deployment.yaml
-k8s-tear-ubuntu-down:
-	kubectl delete -f ubuntu.yaml
-k8s-tear-down: k8s-tear-aggregator-down k8s-tear-registry-down k8s-tear-ubuntu-down
-logs:
-	kubectl get pods --all-namespaces
-	kubectl get svc
-redirect-ports:
-	kubectl port-forward svc/wlsm-registry -n default 5000:5000
-k8s-init-start: k8s-apply-registry-deployment redirect-ports
-k8s-ubuntu-shell:
-	kubectl exec --stdin --tty ubuntu  -- /bin/bash
-
-# Just for tests
-
-# Starts the registry locally. This is not important for the project
-start-registry:
-	docker ps -a --format '{{.ID}}' -q --filter="name=registry" | xargs -I {}  docker stop {}
-	docker ps -a --format '{{.ID}}' -q --filter="name=registry" | xargs -I {}  docker rm {}
-	docker run -d -p 5000:5000 --restart=always --name registry registry:2
-create-local-registry: start-registry create-and-push-images
