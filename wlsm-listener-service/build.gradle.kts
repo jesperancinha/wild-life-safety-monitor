@@ -11,6 +11,10 @@ java {
 	sourceCompatibility = JavaVersion.VERSION_21
 }
 
+tasks.bootJar {
+	archiveFileName.set("wlsm-listener-service.jar")
+}
+
 repositories {
 	mavenCentral()
 }
