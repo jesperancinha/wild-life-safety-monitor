@@ -5,6 +5,9 @@ MODULE_LOCATIONS := wlsm-aggregator-service \
 					wlsm-listener-service \
 					wlsm-management-service
 
+b: buildw
+build-root:
+	gradle build
 install-all:
 	sudo npm install -g @angular/cli
 	sudo apt-get install -y apt-transport-https ca-certificates curl gpg
@@ -13,8 +16,7 @@ install-all:
 	sudo apt-get update
 	sudo apt-get install -y kubelet kubeadm kubectl
 	sudo apt-mark hold kubelet kubeadm kubectl
-b: build
-build: build-gradle
+buildw: build-gradle
 build-gradle:
 	gradle wrapper
 	./gradlew build test
