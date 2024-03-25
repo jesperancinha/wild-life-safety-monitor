@@ -4,7 +4,10 @@ MODULE_LOCATIONS := wlsm-aggregator-service \
 					wlsm-collector-service \
 					wlsm-listener-service \
 					wlsm-management-service
-
+MODULE_TAGS := aggregator \
+			   collector \
+			   listener \
+			   management
 b: buildw
 build-root:
 	gradle build
@@ -29,20 +32,31 @@ build-gradle:
 	done
 create-local-registry:
 	./registry-service.yaml
-init: create-cluster create-local-registry k8s-apply-deployment
+k8s-init: create-cluster create-local-registry k8s-apply-deployment
 create-and-push-images:
-	cd wlsm-aggregator-service; \
-	docker build . --tag localhost:5001/wlsm-aggregator-service; \
-	docker push localhost:5001/wlsm-aggregator-service; \
-	docker pull localhost:5001/wlsm-aggregator-service;
+	@for tag in $(MODULE_TAGS); do \
+		export CURRENT=$(shell pwd); \
+		echo "Building Image $$image..."; \
+		cd "wlsm-"$$tag"-service"; \
+		docker build . --tag localhost:5001/"wlsm-"$$tag"-service"; \
+		docker push localhost:5001/"wlsm-"$$tag"-service"; \
+		cd $$CURRENT; \
+	done
 create-cluster:
 	kind create cluster --name=wlsm-mesh-zone
 	kubectl cluster-info --context kind-wlsm-mesh-zone
 logs:
 	kubectl get pods --all-namespaces
 	kubectl get svc
-k8s-apply-deployment: create-and-push-images
-	kubectl apply -f aggregator-deployment.yaml
+	kubectl get svc --all-namespaces -o=jsonpath='{range .items[*]}{"Namespace: "}{.metadata.namespace}{"\n"}{"Service: "}{.metadata.name}{"\n"}{"Ports:\n"}{range .spec.ports[*]}{"- Name: "}{.name}{"\n"}{"  Protocol: "}{.protocol}{"\n"}{"  Port: "}{.port}{"\n"}{"  TargetPort: "}{.targetPort}{"\n"}{"  NodePort: "}{.nodePort}{"\n"}{end}{"\n"}{end}'
+k8s-apply-deployment:
+	@for tag in $(MODULE_TAGS); do \
+		export CURRENT=$(shell pwd); \
+		echo "Applying File $$tag..."; \
+		cd "wlsm-"$$tag"-service"; \
+		kubectl apply -f $$tag-deployment.yaml; \
+		cd $$CURRENT; \
+	done
 k8s-tear-aggregator-down:
 	kubectl delete -f aggregator-deployment.yaml
 k8s-tear-down: k8s-tear-aggregator-down
@@ -53,6 +67,8 @@ k8s-ubuntu-shell:
 # They are not. however in use anymore for the project
 k8s-init-start: k8s-apply-registry-deployment redirect-ports
 create-local-registry: start-registry create-and-push-images
+k8s-apply-aggregator-deployment:
+	kubectl apply -f aggregator-deployment.yaml
 k8s-apply-ubuntu-deployment:
 	kubectl apply -f ubuntu.yaml
 k8s-apply-registry-deployment:
@@ -65,13 +81,10 @@ k8s-tear-ubuntu-down:
 k8s-tear-all-down: k8s-tear-aggregator-down k8s-tear-registry-down k8s-tear-ubuntu-down
 redirect-ports:
 	kubectl port-forward svc/wlsm-registry -n default 5000:5000
-remove-registry:
-	docker ps -a --format '{{.ID}}' -q --filter="name=registry" | xargs -I {}  docker stop {}
-	docker ps -a --format '{{.ID}}' -q --filter="name=registry" | xargs -I {}  docker rm {}
-start-registry: remove-registry
+start-registry: stop-remove-registry
 	docker run -d -p 5000:5000 --restart=always --name registry registry:2
 stop-registry:
-	docker stop registry
+	docker ps -a --format '{{.ID}}' -q --filter="name=registry" | xargs -I {}  docker stop {}
 remove-registry:
-	docker rm registry
+	docker ps -a --format '{{.ID}}' -q --filter="name=registry" | xargs -I {}  docker rm {}
 stop-remove-registry: stop-registry remove-registry
