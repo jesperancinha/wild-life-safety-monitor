@@ -21,6 +21,7 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
+	implementation("com.hazelcast:hazelcast:5.3.6")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.projectreactor:reactor-test")
 }
