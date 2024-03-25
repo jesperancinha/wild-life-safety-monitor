@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wlsm-listener
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wlsm-listener
+  template:
+    metadata:
+      labels:
+        app: wlsm-listener
+    spec:
+      containers:
+        - name: wlsm-listener-service
+          image: localhost:5001/wlsm-listener-service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8082
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wlsm-listener-deployment
+spec:
+  selector:
+    app: wlsm-listener
+  ports:
+    - protocol: TCP
+      appProtocol: http
+      port: 8082

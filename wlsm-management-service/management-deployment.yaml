@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wlsm-management
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wlsm-management
+  template:
+    metadata:
+      labels:
+        app: wlsm-management
+    spec:
+      containers:
+        - name: wlsm-management-service
+          image: localhost:5001/wlsm-management-service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8082
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wlsm-management-deployment
+spec:
+  selector:
+    app: wlsm-management
+  ports:
+    - protocol: TCP
+      appProtocol: http
+      port: 8082

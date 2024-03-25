@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wlsm-collector
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wlsm-collector
+  template:
+    metadata:
+      labels:
+        app: wlsm-collector
+    spec:
+      containers:
+        - name: wlsm-collector-service
+          image: localhost:5001/wlsm-collector-service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8082
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wlsm-collector-deployment
+spec:
+  selector:
+    app: wlsm-collector
+  ports:
+    - protocol: TCP
+      appProtocol: http
+      port: 8082
