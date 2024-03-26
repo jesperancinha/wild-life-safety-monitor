@@ -17,7 +17,7 @@ public class ListenerService {
     @Value("${wslm.url.collector:http://localhost:8080}")
     private String collectorUrl;
 
-    WebClient client = WebClient.create(collectorUrl);
+    private final WebClient client = WebClient.create(collectorUrl);
 
     HazelcastInstance hazelcastInstance = Hazelcast.newHazelcastInstance();
     List<AnimalLocation> cache = hazelcastInstance.getList("data");
@@ -27,7 +27,7 @@ public class ListenerService {
         cache.add(animalLocation);
 
         return client.post()
-                .uri("/animals")
+                .uri(collectorUrl.concat("/animals"))
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(animalLocation)
                 .retrieve()

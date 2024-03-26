@@ -1,6 +1,5 @@
 package org.jesperancinha.wlsmcollectorservice
 
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -13,8 +12,8 @@ class CollectorController(
 ) {
 
     @PostMapping("animals")
-    suspend fun listenAnimalLocation(@RequestBody animalLocation: AnimalLocation): ResponseEntity<Unit> = run {
-         collectorService.persist(animalLocation)
-        ResponseEntity.ok().build()
+    suspend fun listenAnimalLocation(@RequestBody animalLocation: AnimalLocation): AnimalLocation = run {
+        collectorService.persist(animalLocation)
+        animalLocation
     }
 }

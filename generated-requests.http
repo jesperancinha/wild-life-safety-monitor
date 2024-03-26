@@ -12,7 +12,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:8081/app/v1/collector/animals
+POST http://localhost:8081/api/v1/collector/animals
 Content-Type: application/json
 
 {
