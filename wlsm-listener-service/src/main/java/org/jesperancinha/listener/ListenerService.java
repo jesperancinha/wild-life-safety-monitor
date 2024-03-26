@@ -3,6 +3,7 @@ package org.jesperancinha.listener;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -27,6 +28,8 @@ public class ListenerService {
 
         return client.post()
                 .uri("/animals")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(animalLocation)
                 .retrieve()
                 .bodyToMono(AnimalLocation.class);
     }

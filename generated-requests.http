@@ -1,0 +1,22 @@
+###
+GET http://localhost:8080/app/v1/listener/info
+
+###
+POST http://localhost:8080/app/v1/listener/create
+Content-Type: application/json
+
+{
+  "name": "Sabrina",
+  "latitude": 52505252,
+  "longitude": 2869152
+}
+
+###
+POST http://localhost:8081/app/v1/collector/animals
+Content-Type: application/json
+
+{
+  "name": "Sabrina",
+  "latitude": 52505252,
+  "longitude": 2869152
+}

@@ -1,4 +1,12 @@
 package org.jesperancinha.wlsmcollectorservice
 
-class CollectorDomain {
-}
+
+data class AnimalLocation(
+    val name: String,
+    val latitude: Long,
+    val longitude: Long
+)
+
+data class AnimalLocationEvent (
+    val animalLocation: AnimalLocation
+)
