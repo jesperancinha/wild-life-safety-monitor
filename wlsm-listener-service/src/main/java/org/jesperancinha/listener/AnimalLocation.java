@@ -3,7 +3,7 @@ package org.jesperancinha.listener;
 import java.util.UUID;
 
 public record AnimalLocation(
-        UUID id,
+        UUID animalId,
         Long latitude,
         Long longitude
 ) {
