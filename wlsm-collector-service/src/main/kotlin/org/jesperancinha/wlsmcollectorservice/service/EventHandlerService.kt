@@ -1,5 +1,7 @@
 package org.jesperancinha.wlsmcollectorservice.service
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import org.jesperancinha.wlsmcollectorservice.domain.AnimalLocationDao
 import org.jesperancinha.wlsmcollectorservice.dtos.AnimalLocationEvent
 import org.jesperancinha.wlsmcollectorservice.dtos.toEntity
@@ -14,6 +16,8 @@ class EventHandlerService(
     @EventListener
     fun processEvent(animalLocationEvent: AnimalLocationEvent){
         println(animalLocationEvent)
-        animalLocationDao.save(animalLocationEvent.animalLocationDto.toEntity())
+        runBlocking(Dispatchers.IO) {
+            animalLocationDao.save(animalLocationEvent.animalLocationDto.toEntity())
+        }
     }
 }

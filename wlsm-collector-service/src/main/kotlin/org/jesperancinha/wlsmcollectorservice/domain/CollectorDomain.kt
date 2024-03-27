@@ -1,7 +1,7 @@
 package org.jesperancinha.wlsmcollectorservice.domain
 
-import org.jesperancinha.wlsmcollectorservice.dtos.AnimalLocationDto
-import java.util.UUID
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import org.jesperancinha.wlsmcollectorservice.dtos.AnimalLocation
+import org.springframework.data.repository.kotlin.CoroutineCrudRepository
+import java.util.*
 
-interface AnimalLocationDao : ReactiveCrudRepository<AnimalLocationDto, UUID>
+interface AnimalLocationDao : CoroutineCrudRepository<AnimalLocation, UUID>
