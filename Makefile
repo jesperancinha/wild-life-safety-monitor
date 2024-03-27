@@ -42,6 +42,10 @@ create-and-push-images:
 		docker push localhost:5001/"wlsm-"$$tag"-service"; \
 		cd $$CURRENT; \
 	done
+create-database-image:
+	cd wlsm-database; \
+	docker build . --tag localhost:5001/wlsm-database ;\
+	docker push localhost:5001/wlsm-database
 create-cluster:
 	kind create cluster --name=wlsm-mesh-zone
 	kubectl cluster-info --context kind-wlsm-mesh-zone
