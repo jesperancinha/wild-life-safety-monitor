@@ -1,7 +1,9 @@
 package org.jesperancinha.listener;
 
+import java.util.UUID;
+
 public record AnimalLocation(
-        String name,
+        UUID id,
         Long latitude,
         Long longitude
 ) {
