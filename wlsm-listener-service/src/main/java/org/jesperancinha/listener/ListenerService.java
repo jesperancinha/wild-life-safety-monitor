@@ -1,7 +1,10 @@
 package org.jesperancinha.listener;
 
+import com.hazelcast.config.Config;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.nio.serialization.DataSerializableFactory;
+import com.hazelcast.nio.serialization.IdentifiedDataSerializable;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -18,19 +21,17 @@ public class ListenerService {
     private String collectorUrl;
 
     private final WebClient client = WebClient.create(collectorUrl);
-
     HazelcastInstance hazelcastInstance = Hazelcast.newHazelcastInstance();
-    List<AnimalLocation> cache = hazelcastInstance.getList("data");
+    List<AnimalLocationDto> cache = hazelcastInstance.getList("data");
 
-
-    public Mono<AnimalLocation> persist(AnimalLocation animalLocation) {
-        cache.add(animalLocation);
+    public Mono<AnimalLocationDto> persist(AnimalLocationDto animalLocationDto) {
+        cache.add(animalLocationDto);
 
         return client.post()
                 .uri(collectorUrl.concat("/animals"))
                 .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(animalLocation)
+                .bodyValue(animalLocationDto)
                 .retrieve()
-                .bodyToMono(AnimalLocation.class);
+                .bodyToMono(AnimalLocationDto.class);
     }
 }

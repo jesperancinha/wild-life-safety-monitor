@@ -19,8 +19,8 @@ public class ListenerController {
     }
 
     @PostMapping("create")
-    public Mono<AnimalLocation> sendAnimalLocation(
-            @RequestBody AnimalLocation animalLocation) {
-        return listenerService.persist(animalLocation);
+    public Mono<AnimalLocationDto> sendAnimalLocation(
+            @RequestBody AnimalLocationDto animalLocationDto) {
+        return listenerService.persist(animalLocationDto);
     }
 }

@@ -7,6 +7,7 @@ import java.util.*
 @Table
 data class AnimalLocation(
     @Id
+    val id: UUID? = null,
     val animalId: UUID,
     val latitude: Long,
     val longitude: Long
