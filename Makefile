@@ -23,6 +23,10 @@ install-all:
 	sudo apt-get update
 	sudo apt-get install -y kubelet kubeadm kubectl
 	sudo apt-mark hold kubelet kubeadm kubectl
+setup-kuma:
+	helm repo add kuma https://kumahq.github.io/charts
+	helm repo update
+	helm install --create-namespace --namespace kuma-system kuma kuma/kuma
 buildw: build-gradle
 build-gradle:
 	gradle wrapper
@@ -100,8 +104,9 @@ k8s-tear-ubuntu-down:
 	kubectl delete -f ubuntu.yaml
 k8s-tear-all-down: k8s-tear-aggregator-down k8s-tear-registry-down k8s-tear-ubuntu-down
 redirect-ports:
-	kubectl port-forward svc/wlsm-listener-deployment -n default 8080:8080
-	kubectl port-forward svc/wlsm-database-deployment -n default 5432:5432
+	kubectl port-forward svc/wlsm-collector-deployment 8081:8081
+	kubectl port-forward svc/wlsm-listener-deployment 8080:8080
+	kubectl port-forward svc/wlsm-database-deployment 5432:5432
 start-registry: stop-remove-registry
 	docker run -d -p 5000:5000 --restart=always --name registry registry:2
 stop-registry:
