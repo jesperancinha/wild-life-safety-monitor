@@ -6,7 +6,7 @@ POST http://localhost:8080/app/v1/listener/create
 Content-Type: application/json
 
 {
-  "animalId": "7018707d-fe9d-43de-8b82-8484581a6e0e",
+  "animalId": "c45d4c17-055d-42b5-8af6-575d281d7e2f",
   "latitude": 52505252,
   "longitude": 2869152
 }

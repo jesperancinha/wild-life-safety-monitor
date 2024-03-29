@@ -15,7 +15,7 @@ spec:
       containers:
         - name: wlsm-database-service
           image: localhost:5001/wlsm-database-service:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 5432
 ---

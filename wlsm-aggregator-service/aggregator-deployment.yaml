@@ -15,7 +15,7 @@ spec:
       containers:
         - name: wlsm-aggregator-service
           image: localhost:5001/wlsm-aggregator-service:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 8082
 ---

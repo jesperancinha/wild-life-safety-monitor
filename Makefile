@@ -34,7 +34,9 @@ build-gradle:
 create-local-registry:
 	./registry-service.yaml
 k8s-init: create-cluster create-local-registry k8s-apply-deployment
-create-and-push-images:
+create-and-push-images: k8s-tear-down
+	#docker images -f "dangling=true" -q | xargs -I {}  docker rmi {}
+	docker images "*/*wlsm*" --format '{{.Repository}}' | xargs -I {}  docker rmi {}
 	@for tag in $(MODULE_TAGS); do \
 		export CURRENT=$(shell pwd); \
 		echo "Building Image $$image..."; \
@@ -60,15 +62,23 @@ k8s-apply-deployment:
 		export CURRENT=$(shell pwd); \
 		echo "Applying File $$tag..."; \
 		cd "wlsm-"$$tag"-service"; \
-		kubectl apply -f $$tag-deployment.yaml; \
+		kubectl apply -f $$tag-deployment.yaml --force; \
 		cd $$CURRENT; \
 	done
+k8s-restart-pods:
 	kubectl delete pods --all
 k8s-tear-aggregator-down:
 	kubectl delete -f aggregator-deployment.yaml
-k8s-tear-down: k8s-tear-aggregator-down
+k8s-tear-down:
+	@for tag in $(MODULE_TAGS); do \
+		export CURRENT=$(shell pwd); \
+		echo "Tearing down $$tag..."; \
+		cd "wlsm-"$$tag"-service"; \
+		kubectl delete -f $$tag-deployment.yaml --ignore-not-found=true; \
+		cd $$CURRENT; \
+	done
 k8s-ubuntu-shell:
-	kubectl exec --stdin --tty ubuntu  -- /bin/bash
+	kubectl exec --stdin --tty wlsm-listener-deployment  -- /bin/bash
 
 # This is a set of different scripts used to try, create and test this project.
 # They are not. however in use anymore for the project

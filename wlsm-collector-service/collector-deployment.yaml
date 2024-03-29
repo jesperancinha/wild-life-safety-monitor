@@ -15,7 +15,7 @@ spec:
       containers:
         - name: wlsm-collector-service
           image: localhost:5001/wlsm-collector-service:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 8081
 ---

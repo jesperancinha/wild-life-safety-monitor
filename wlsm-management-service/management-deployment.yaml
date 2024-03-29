@@ -15,7 +15,7 @@ spec:
       containers:
         - name: wlsm-management-service
           image: localhost:5001/wlsm-management-service:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 8083
 ---

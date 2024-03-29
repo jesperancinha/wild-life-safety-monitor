@@ -15,7 +15,7 @@ spec:
       containers:
         - name: wlsm-listener-service
           image: localhost:5001/wlsm-listener-service:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
 ---
