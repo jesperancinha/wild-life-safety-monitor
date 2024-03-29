@@ -7,7 +7,8 @@ MODULE_LOCATIONS := wlsm-aggregator-service \
 MODULE_TAGS := aggregator \
 			   collector \
 			   listener \
-			   management
+			   management \
+			   database
 b: buildw
 build-root:
 	gradle build
@@ -49,8 +50,9 @@ create-database-image:
 create-cluster:
 	kind create cluster --name=wlsm-mesh-zone
 	kubectl cluster-info --context kind-wlsm-mesh-zone
-logs:
+log-pods:
 	kubectl get pods --all-namespaces
+logs: log-pods
 	kubectl get svc
 	kubectl get svc --all-namespaces -o=jsonpath='{range .items[*]}{"Namespace: "}{.metadata.namespace}{"\n"}{"Service: "}{.metadata.name}{"\n"}{"Ports:\n"}{range .spec.ports[*]}{"- Name: "}{.name}{"\n"}{"  Protocol: "}{.protocol}{"\n"}{"  Port: "}{.port}{"\n"}{"  TargetPort: "}{.targetPort}{"\n"}{"  NodePort: "}{.nodePort}{"\n"}{end}{"\n"}{end}'
 k8s-apply-deployment:
@@ -61,6 +63,7 @@ k8s-apply-deployment:
 		kubectl apply -f $$tag-deployment.yaml; \
 		cd $$CURRENT; \
 	done
+	kubectl delete pods --all
 k8s-tear-aggregator-down:
 	kubectl delete -f aggregator-deployment.yaml
 k8s-tear-down: k8s-tear-aggregator-down
@@ -84,7 +87,8 @@ k8s-tear-ubuntu-down:
 	kubectl delete -f ubuntu.yaml
 k8s-tear-all-down: k8s-tear-aggregator-down k8s-tear-registry-down k8s-tear-ubuntu-down
 redirect-ports:
-	kubectl port-forward svc/wlsm-registry -n default 5000:5000
+	kubectl port-forward svc/wlsm-listener-deployment -n default 8080:8080
+	kubectl port-forward svc/wlsm-database-deployment -n default 5432:5432
 start-registry: stop-remove-registry
 	docker run -d -p 5000:5000 --restart=always --name registry registry:2
 stop-registry:

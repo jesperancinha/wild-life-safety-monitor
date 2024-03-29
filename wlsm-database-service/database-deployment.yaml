@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wlsm-database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wlsm-database
+  template:
+    metadata:
+      labels:
+        app: wlsm-database
+    spec:
+      containers:
+        - name: wlsm-database-service
+          image: localhost:5001/wlsm-database-service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5432
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wlsm-database-deployment
+spec:
+  selector:
+    app: wlsm-database
+  ports:
+    - protocol: TCP
+      appProtocol: http
+      port: 5432
