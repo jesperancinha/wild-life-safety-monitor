@@ -89,6 +89,8 @@ k8s-ubuntu-shell:
 
 # This is a set of different scripts used to try, create and test this project.
 # They are not. however in use anymore for the project
+k8s-dns-check:
+	kubectl exec -ti wlsm-collector-5744c9b896-2k6b4 -n wlsm-namespace -- nslookup kubernetes.default
 k8s-init-start: k8s-apply-registry-deployment redirect-ports
 create-local-registry: start-registry create-and-push-images
 k8s-apply-aggregator-deployment:

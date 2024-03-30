@@ -25,7 +25,8 @@ spec:
           image: localhost:5001/wlsm-database-service:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 5432
+            - name: tcp
+              containerPort: 5432
 ---
 apiVersion: v1
 kind: Service
@@ -37,5 +38,4 @@ spec:
     app: wlsm-database
   ports:
     - protocol: TCP
-      appProtocol: http
       port: 5432
