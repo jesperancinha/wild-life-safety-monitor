@@ -16,7 +16,7 @@ POST http://localhost:8081/api/v1/collector/animals
 Content-Type: application/json
 
 {
-  "animalId": "0a68f84a-b4ef-4cd1-bbac-b6f6b703feec",
+  "animalId": "0d7657bd-b3a2-4fe5-bab2-c525a6749765",
   "latitude": 52505252,
   "longitude": 2869152
 }
