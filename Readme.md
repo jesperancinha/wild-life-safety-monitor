@@ -91,6 +91,79 @@ make k8s-init-start
 make k8s-apply-deployment
 ```
 
+## Commands
+
+#### Establish Mesh Traffic Permissions
+```shell
+echo "apiVersion: kuma.io/v1alpha1
+kind: MeshTrafficPermission
+metadata:
+  namespace: kuma-system
+  name: mtp
+spec:
+  targetRef:
+    kind: Mesh
+  from:
+    - targetRef:
+        kind: Mesh
+      default:
+        action: Allow" | kubectl apply -f -
+```
+#### Mutual TLS
+
+```shell
+echo "apiVersion: kuma.io/v1alpha1
+kind: Mesh
+metadata:
+  name: default
+spec:
+  mtls:
+    enabledBackend: ca-1
+    backends:
+    - name: ca-1
+      type: builtin" | kubectl apply -f -
+```
+#### Deny All Traffic
+
+```shell
+echo "
+apiVersion: kuma.io/v1alpha1
+kind: MeshTrafficPermission
+metadata:
+  namespace: kuma-system
+  name: mtp
+spec:
+  targetRef:
+    kind: Mesh
+  from:
+    - targetRef:
+        kind: Mesh
+      default:
+        action: Deny" | kubectl apply -f -
+```
+
+#### Establish allow policy
+
+```shell
+echo "
+apiVersion: kuma.io/v1alpha1
+kind: MeshTrafficPermission
+metadata:
+  namespace: kuma-system
+  name: wlsm-database
+spec:       
+  targetRef:
+    kind: MeshService
+    name: wlsm-database-deployment_wlsm-namespace_svc_5432
+  from:
+    - targetRef:
+        kind: MeshService
+        name: wlsm-collector-deployment_wlsm-namespace_svc_8081
+      default:
+        action: Allow" | kubectl apply -f -
+meshtrafficpermission.kuma.io/wlsm-database created
+```
+
 ## Fixes
 
 1. Install Docker in Alpine container
@@ -117,7 +190,6 @@ apt-get update
 apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin vim
 chown root:docker /var/run/docker.sock
 ```
-
 
 ###### From https://forums.docker.com/t/etc-init-d-docker-62-ulimit-error-setting-limit-invalid-argument-problem/139424:
 
