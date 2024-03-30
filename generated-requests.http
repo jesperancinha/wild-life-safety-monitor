@@ -6,7 +6,7 @@ POST http://localhost:8080/app/v1/listener/create
 Content-Type: application/json
 
 {
-  "animalId": "c45d4c17-055d-42b5-8af6-575d281d7e2f",
+  "animalId": "7082d612-7153-4372-94ef-2f73cf898d6a",
   "latitude": 52505252,
   "longitude": 2869152
 }
@@ -16,7 +16,7 @@ POST http://localhost:8081/api/v1/collector/animals
 Content-Type: application/json
 
 {
-  "animalId": "aef69d2b-ecf6-49b9-b7c6-9104a6a42c49",
+  "animalId": "89711cc7-b394-45e6-8ee6-b96634846585",
   "latitude": 52505252,
   "longitude": 2869152
 }

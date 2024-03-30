@@ -104,9 +104,9 @@ k8s-tear-ubuntu-down:
 	kubectl delete -f ubuntu.yaml
 k8s-tear-all-down: k8s-tear-aggregator-down k8s-tear-registry-down k8s-tear-ubuntu-down
 redirect-ports:
-	kubectl port-forward svc/wlsm-collector-deployment 8081:8081
-	kubectl port-forward svc/wlsm-listener-deployment 8080:8080
-	kubectl port-forward svc/wlsm-database-deployment 5432:5432
+	kubectl port-forward svc/wlsm-collector-deployment -n wlsm-namespace 8081:8081
+	kubectl port-forward svc/wlsm-listener-deployment -n wlsm-namespace 8080:8080
+	kubectl port-forward svc/wlsm-database-deployment -n wlsm-namespace 5432:5432
 start-registry: stop-remove-registry
 	docker run -d -p 5000:5000 --restart=always --name registry registry:2
 stop-registry:
