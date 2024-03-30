@@ -73,7 +73,7 @@ k8s-apply-deployment:
 		cd $$CURRENT; \
 	done
 k8s-restart-pods:
-	kubectl delete pods --all
+	kubectl delete pods --all -n wlsm-namespace
 k8s-tear-aggregator-down:
 	kubectl delete -f aggregator-deployment.yaml
 k8s-tear-down:
