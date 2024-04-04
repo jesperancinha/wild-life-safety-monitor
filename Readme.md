@@ -197,6 +197,10 @@ chown root:docker /var/run/docker.sock
 Line 62 of the /etc/init.d/docker file has "ulimit -Hn 524288". Remove the H.
 ```
 
+## Resources
+
+- [K9s](https://k9scli.io/)
+
 ## About me
 
 [![GitHub followers](https://img.shields.io/github/followers/jesperancinha.svg?label=Jesperancinha&style=for-the-badge&logo=github&color=grey "GitHub")](https://github.com/jesperancinha)

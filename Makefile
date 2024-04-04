@@ -36,8 +36,8 @@ uninstall-all:
 	if [ -f /usr/local/bin/helm ]; then sudo rm /usr/local/bin/helm; fi
 setup-kuma:
 	helm repo add kuma https://kumahq.github.io/charts
-	helm upgrade -i kuma kuma/kuma
 	helm repo update
+	helm upgrade -i kuma kuma/kuma
 	helm install --create-namespace --namespace kuma-system kuma kuma/kuma
 buildw: build-gradle
 build-gradle:
