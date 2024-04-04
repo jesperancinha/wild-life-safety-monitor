@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-GRADLE_VERSION ?= 8.5
+GRADLE_VERSION ?= 8.7
 MODULE_LOCATIONS := wlsm-aggregator-service \
 					wlsm-collector-service \
 					wlsm-listener-service \
