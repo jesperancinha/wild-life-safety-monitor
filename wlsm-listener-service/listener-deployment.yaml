@@ -1,7 +1,15 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: wlsm-namespace
+  labels:
+    kuma.io/sidecar-injection: enabled
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wlsm-listener
+  namespace: wlsm-namespace
 spec:
   replicas: 1
   selector:
@@ -23,6 +31,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: wlsm-listener-deployment
+  namespace: wlsm-namespace
 spec:
   selector:
     app: wlsm-listener
