@@ -40,8 +40,7 @@ uninstall-all:
 setup-kuma:
 	helm repo add kuma https://kumahq.github.io/charts
 	helm repo update
-	helm upgrade -i kuma kuma/kuma
-	#helm install --create-namespace --namespace kuma-system kuma kuma/kuma
+	helm install --create-namespace --namespace kuma-system kuma kuma/kuma
 buildw: build-gradle
 build-gradle:
 	gradle wrapper
@@ -124,6 +123,7 @@ redirect-ports:
 	kubectl port-forward svc/wlsm-collector-deployment -n wlsm-namespace 8081:8081
 	kubectl port-forward svc/wlsm-listener-deployment -n wlsm-namespace 8080:8080
 	kubectl port-forward svc/wlsm-database-deployment -n wlsm-namespace 5432:5432
+	kubectl port-forward svc/kuma-control-plane -n kuma-system 5681:5681
 start-registry: stop-remove-registry
 	docker run -d -p 5000:5000 --restart=always --name registry registry:2
 stop-registry:
