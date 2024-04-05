@@ -27,7 +27,10 @@ install-all:
 	sudo apt-mark hold kubelet kubeadm kubectl helm
 	cd ~; \
 	curl -L https://kuma.io/installer.sh | VERSION=2.6.1 sh -
+remove-all-cluster:
+	kind delete clusters --all
 uninstall-all:
+	kind delete clusters --all
 	if [ -f /usr/local/bin/kind ]; then sudo rm /usr/local/bin/kind; fi
 	if [ -d ~/kuma-* ]; then sudo rm -r ~/kuma-*; fi
 	sudo apt remove kubelet kubeadm kubectl helm
@@ -38,7 +41,7 @@ setup-kuma:
 	helm repo add kuma https://kumahq.github.io/charts
 	helm repo update
 	helm upgrade -i kuma kuma/kuma
-	helm install --create-namespace --namespace kuma-system kuma kuma/kuma
+	#helm install --create-namespace --namespace kuma-system kuma kuma/kuma
 buildw: build-gradle
 build-gradle:
 	gradle wrapper
