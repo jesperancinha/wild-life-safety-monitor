@@ -161,7 +161,53 @@ spec:
         name: wlsm-collector-deployment_wlsm-namespace_svc_8081
       default:
         action: Allow" | kubectl apply -f -
-meshtrafficpermission.kuma.io/wlsm-database created
+```
+
+#### Establish another allow policy
+
+```shell
+echo "
+apiVersion: kuma.io/v1alpha1
+kind: MeshTrafficPermission
+metadata:
+  namespace: kuma-system
+  name: wlsm-collector
+spec:       
+  targetRef:
+    kind: MeshService
+    name: wlsm-collector-deployment_wlsm-namespace_svc_8081
+  from:
+    - targetRef:
+        kind: MeshService
+        name: wlsm-listener-deployment_wlsm-namespace_svc_8080
+      default:
+        action: Allow" | kubectl apply -f -
+```
+
+#### Establish Fault Injection Policy
+
+```shell
+echo "
+apiVersion: kuma.io/v1alpha1
+kind: MeshFaultInjection
+metadata:
+  name: default
+  namespace: kuma-system
+  labels:
+    kuma.io/mesh: default # optional, defaults to `default` if it isn't configured
+spec:
+  targetRef:
+    kind: MeshService
+    name: wlsm-collector-deployment_wlsm-namespace_svc_8081
+  from:
+    - targetRef:
+        kind: MeshService
+        name: wlsm-listener-deployment_wlsm-namespace_svc_8080
+      default:
+        http:
+          - abort:
+              httpStatus: 500
+              percentage: 50"  | kubectl apply -f -
 ```
 
 ## Fixes

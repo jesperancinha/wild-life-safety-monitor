@@ -131,3 +131,5 @@ stop-registry:
 remove-registry:
 	docker ps -a --format '{{.ID}}' -q --filter="name=registry" | xargs -I {}  docker rm {}
 stop-remove-registry: stop-registry remove-registry
+check-mtls:
+	kumactl get mesh default -oyaml
