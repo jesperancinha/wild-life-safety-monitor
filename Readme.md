@@ -246,6 +246,8 @@ Line 62 of the /etc/init.d/docker file has "ulimit -Hn 524288". Remove the H.
 ## Resources
 
 - [K9s](https://k9scli.io/)
+- [North-South traffic](https://www.site24x7.com/it-glossary/north-south-and-east-west-traffic-security-.html)
+- [East-West traffic](https://www.site24x7.com/it-glossary/north-south-and-east-west-traffic-security-.html)
 
 ## About me
 
