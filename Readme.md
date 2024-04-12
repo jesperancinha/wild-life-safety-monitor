@@ -21,8 +21,6 @@ sequenceDiagram
     end
 ```
 
-```
-
 ## Services Description
 
 #### Listener Service
