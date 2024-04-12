@@ -6,6 +6,20 @@ a real world scenario.
 ## Diagram
 
 ```mermaid
+sequenceDiagram
+    participant Piquinho
+    participant Listener Service
+    participant Collector Service
+    participant Database Service
+    
+    rect rgb(200,200,200)
+
+    Piquinho->>Listener Service: The sensor in Piquinho sends data
+    Listener Service->>Collector Service: The sensor data gets relayed to the collector service
+    Collector Service->>Database Service: The collector service sends data to the databae.
+    
+    end
+```
 
 ```
 
@@ -194,7 +208,7 @@ metadata:
   name: default
   namespace: kuma-system
   labels:
-    kuma.io/mesh: default # optional, defaults to `default` if it isn't configured
+    kuma.io/mesh: default
 spec:
   targetRef:
     kind: MeshService
@@ -249,6 +263,8 @@ Line 62 of the /etc/init.d/docker file has "ulimit -Hn 524288". Remove the H.
 - [K9s](https://k9scli.io/)
 - [North-South traffic](https://www.site24x7.com/it-glossary/north-south-and-east-west-traffic-security-.html)
 - [East-West traffic](https://www.site24x7.com/it-glossary/north-south-and-east-west-traffic-security-.html)
+- [Getting Started With Kuma Service Mesh](https://konghq.com/blog/engineering/getting-started-kuma-service-mesh)
+- [Deploy Kuma on Kubernetes](https://kuma.io/docs/2.6.x/quickstart/kubernetes-demo/)
 
 ## About me
 
