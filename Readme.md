@@ -11,8 +11,8 @@ sequenceDiagram
     participant Listener Service
     participant Collector Service
     participant Database Service
-    
-    rect rgb(200,200,200)
+
+    rect rgb(25,25,200)
 
     Piquinho->>Listener Service: The sensor in Piquinho sends data
     Listener Service->>Collector Service: The sensor data gets relayed to the collector service
