@@ -263,6 +263,7 @@ Line 62 of the /etc/init.d/docker file has "ulimit -Hn 524288". Remove the H.
 - [East-West traffic](https://www.site24x7.com/it-glossary/north-south-and-east-west-traffic-security-.html)
 - [Getting Started With Kuma Service Mesh](https://konghq.com/blog/engineering/getting-started-kuma-service-mesh)
 - [Deploy Kuma on Kubernetes](https://kuma.io/docs/2.6.x/quickstart/kubernetes-demo/)
+- [Local Registry with Kind](https://kind.sigs.k8s.io/docs/user/local-registry/)
 
 ## About me
 
