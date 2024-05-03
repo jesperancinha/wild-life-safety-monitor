@@ -10,7 +10,7 @@ a real world scenario.
 
 | Version  - Git-Tag                                                            | Git Hash | Purpose |
 |-------------------------------------------------------------------------------|---|---|
-| [1.0.0](https://github.com/jesperancinha/wild-life-safety-monitor/tree/1.0.0) | [b044738cb741e32aa2e0eed49db42ccdb91fc312](b044738cb741e32aa2e0eed49db42ccdb91fc312) | [Kuma Meshes Head-On - A beginners guide](https://joaofilipesabinoesperancinha.nl/blog/blog16-kuma) |
+| [1.0.0](https://github.com/jesperancinha/wild-life-safety-monitor/tree/1.0.0) | [b044738cb741e32aa2e0eed49db42ccdb91fc312](https://github.com/jesperancinha/wild-life-safety-monitor/tree/b044738cb741e32aa2e0eed49db42ccdb91fc312) | [Kuma Meshes Head-On - A beginners guide](https://joaofilipesabinoesperancinha.nl/blog/blog16-kuma) |
 
 ## Diagram
 
