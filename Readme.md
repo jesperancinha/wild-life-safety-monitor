@@ -224,7 +224,7 @@ spec:
 
 ## Fixes
 
-1. Install Docker in Alpine container
+1.  Install Docker in Alpine container
 
 ```shell
 apk add --update docker openrc
@@ -232,7 +232,7 @@ service docker start
 mkdir /run/openrc
 touch /run/openrc/softlevel
 ```
-2. Install Docker in Ubuntu container
+2.  Install Docker in Ubuntu container
 
 ```shell
 apt-get update
@@ -249,7 +249,7 @@ apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docke
 chown root:docker /var/run/docker.sock
 ```
 
-###### From https://forums.docker.com/t/etc-init-d-docker-62-ulimit-error-setting-limit-invalid-argument-problem/139424:
+###### From https://forums.docker.com/t/etc-init-d-docker-62-ulimit-error-setting-limit-invalid-argument-problem/139424
 
 ```text
 Line 62 of the /etc/init.d/docker file has "ulimit -Hn 524288". Remove the H.
@@ -257,13 +257,13 @@ Line 62 of the /etc/init.d/docker file has "ulimit -Hn 524288". Remove the H.
 
 ## Resources
 
-- [What is mutual TLS (mTLS)?](https://www.cloudflare.com/learning/access-management/what-is-mutual-tls/)
-- [K9s](https://k9scli.io/)
-- [North-South traffic](https://www.site24x7.com/it-glossary/north-south-and-east-west-traffic-security-.html)
-- [East-West traffic](https://www.site24x7.com/it-glossary/north-south-and-east-west-traffic-security-.html)
-- [Getting Started With Kuma Service Mesh](https://konghq.com/blog/engineering/getting-started-kuma-service-mesh)
-- [Deploy Kuma on Kubernetes](https://kuma.io/docs/2.6.x/quickstart/kubernetes-demo/)
-- [Local Registry with Kind](https://kind.sigs.k8s.io/docs/user/local-registry/)
+-   [What is mutual TLS (mTLS)?](https://www.cloudflare.com/learning/access-management/what-is-mutual-tls/)
+-   [K9s](https://k9scli.io/)
+-   [North-South traffic](https://www.site24x7.com/it-glossary/north-south-and-east-west-traffic-security-.html)
+-   [East-West traffic](https://www.site24x7.com/it-glossary/north-south-and-east-west-traffic-security-.html)
+-   [Getting Started With Kuma Service Mesh](https://konghq.com/blog/engineering/getting-started-kuma-service-mesh)
+-   [Deploy Kuma on Kubernetes](https://kuma.io/docs/2.6.x/quickstart/kubernetes-demo/)
+-   [Local Registry with Kind](https://kind.sigs.k8s.io/docs/user/local-registry/)
 
 ## About me
 
