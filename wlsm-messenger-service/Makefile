@@ -14,4 +14,3 @@ protoc-gen:
 	mkdir "generated-code"; \
 	protoc --plugin=protoc-gen-grpckt=protoc-gen-grpc-kotlin.sh \
 	  --grpckt_out="./$(OUTPUT_FILE)" --proto_path="$(DIR_OF_PROTO_FILE)" "$(PROTO_FILE)"
-	#protoc --plugin=protoc-gen-grpc-kotlin=/usr/local/bin/protoc-gen-grpc-kotlin --kotlin_out=<output_directory> --grpc-kotlin_out=<output_directory> your_service.proto
