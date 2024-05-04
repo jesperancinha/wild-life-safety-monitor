@@ -1,0 +1,2 @@
+*.json
+protoc-gen-grpc-kotlin.sh
