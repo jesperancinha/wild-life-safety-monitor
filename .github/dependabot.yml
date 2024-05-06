@@ -29,3 +29,8 @@ updates:
     directory: "/wlsm-management-service"
     schedule:
       interval: "daily"
+
+  - package-ecosystem: "toml"
+    directory: "build"
+    schedule:
+      interval: "daily"
