@@ -13,7 +13,7 @@ b: buildw
 build-research:
 	cd wlsm-messenger-pre-service; \
 	make install-protobuf; \
-	make install-pluhin; \
+	make install-plugin; \
 	make protoc-gen
 build-root:
 	gradle build
