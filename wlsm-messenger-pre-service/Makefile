@@ -8,7 +8,7 @@ install-protobuf:
 	echo "Remember to install BREW first! Brew is available for Linux and MAC-OS: https://brew.sh/"
 	echo "MAC-OS: https://brew.sh/"
 	echo "Linux: https://docs.brew.sh/Homebrew-on-Linux"
-	echo "/bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"\"
+	echo "/bin/bash -c \"\$\(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"""
 	echo "This configuration is based on the manual provided in: https://github.com/grpc/grpc-kotlin/blob/master/compiler/README.md"
 	brew install protobuf
 install-plugin:
