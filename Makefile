@@ -1,5 +1,5 @@
-SHELL := /bin/bash
-GRADLE_VERSION ?= 8.7
+include Makefile.mk
+
 MODULE_LOCATIONS := wlsm-aggregator-service \
 					wlsm-collector-service \
 					wlsm-listener-service \
@@ -48,7 +48,8 @@ setup-kuma:
 	helm install --create-namespace --namespace kuma-system kuma kuma/kuma
 buildw: build-gradle
 build-gradle:
-	gradle wrapper
+	export GRADLE_VERSION=$(GRADLE_VERSION) ;\
+	gradle wrapper --no-validate-url; \
 	./gradlew build test
 	@for location in $(MODULE_LOCATIONS); do \
 		export CURRENT=$(shell pwd); \

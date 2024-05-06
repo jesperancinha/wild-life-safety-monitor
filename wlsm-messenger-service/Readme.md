@@ -17,3 +17,4 @@ brew install protobuf
 - [protobuf @ GitHub](https://github.com/protocolbuffers/protobuf)
 - [Manage gRPC Services with kong @ KongHQ](https://konghq.com/blog/engineering/manage-grpc-services-kong)
 - [gRPC quickstart in Kotlin](https://grpc.io/docs/languages/kotlin/quickstart/)
+- [Creating versions catalog in Gradle](https://docs.gradle.org/current/userguide/platforms.html#sub:version-catalog)
