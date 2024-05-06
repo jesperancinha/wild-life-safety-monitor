@@ -30,7 +30,7 @@ updates:
     schedule:
       interval: "daily"
 
-  - package-ecosystem: "toml"
+  - package-ecosystem: "gradle"
     directory: "build"
     schedule:
       interval: "daily"
