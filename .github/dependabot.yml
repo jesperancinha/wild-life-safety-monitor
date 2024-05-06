@@ -1,6 +1,16 @@
 version: 2
 updates:
   - package-ecosystem: "gradle"
+    directory: "/"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "gradle"
+    directory: "/wlsm-messenger-service"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "gradle"
     directory: "/wlsm-aggregator-service"
     schedule:
       interval: "daily"
