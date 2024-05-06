@@ -11,13 +11,18 @@ repositories {
 }
 
 val gradleSysVersion = System.getenv("GRADLE_VERSION")
+
 tasks.register<Wrapper>("wrapper") {
     gradleVersion =  gradleSysVersion
 }
 
 dependencies {
+    protobuf(project(":wlsm-messenger-protos"))
     api(libs.grpc.protobuf)
     api(libs.grpc.kotlin.stub)
+    api(libs.protobuf.kotlin)
+    api(libs.grpc.stub)
+    api(libs.protobuf.java.util)
     testImplementation("org.jetbrains.kotlin:kotlin-test")
 }
 
@@ -30,14 +35,14 @@ kotlin {
 
 protobuf {
     protoc {
-        artifact = "com.google.protobuf:protoc:4.26.1"
+        artifact = libs.protoc.asProvider().get().toString()
     }
     plugins {
         create("grpc") {
-            artifact = "io.grpc:protoc-gen-grpc-java:1.63.0"
+            artifact = libs.protoc.gen.grpc.java.get().toString()
         }
         create("grpckt") {
-            artifact = "io.grpc:protoc-gen-grpc-kotlin:1.4.1:jdk8@jar"
+            artifact = libs.protoc.gen.grpc.kotlin.get().toString() + ":jdk8@jar"
         }
     }
     generateProtoTasks {
