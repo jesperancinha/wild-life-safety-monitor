@@ -20,5 +20,9 @@ jobs:
           uses: gradle/gradle-build-action@v2
           with:
             gradle-version: 8.5
+        - name: Set up Homebrew
+          id: set-up-homebrew
+          uses: Homebrew/actions/setup-homebrew@master
+
         - name: All Build
           run:  make build-research

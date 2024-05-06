@@ -1,12 +1,9 @@
+SHELL := /bin/bash
+
 OUTPUT_FILE := generated-code
 DIR_OF_PROTO_FILE := .
 PROTO_FILE := messenger.proto
 
-install-homebrew-linux:
-	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh; \
-	test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)" ;\
-    test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" ;\
-    echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bashrc
 install-protobuf:
 	echo "Remember to install BREW first! Brew is available for Linux and MAC-OS: https://brew.sh/"
 	echo "MAC-OS: https://brew.sh/"

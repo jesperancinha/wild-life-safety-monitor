@@ -12,7 +12,6 @@ MODULE_TAGS := aggregator \
 b: buildw
 build-research:
 	cd wlsm-messenger-pre-service; \
-	make install-homebrew-linux
 	make install-protobuf; \
 	make install-pluhin; \
 	make protoc-gen
