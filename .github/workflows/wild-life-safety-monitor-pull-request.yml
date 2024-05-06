@@ -22,4 +22,4 @@ jobs:
             gradle-version: 8.5
 
         - name: All Build
-          run: make b
+          run: make

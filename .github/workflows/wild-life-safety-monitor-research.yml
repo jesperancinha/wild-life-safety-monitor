@@ -1,4 +1,4 @@
-name: Wildlife safety monitor
+name: Wildlife safety monitor - research
 
 on:
   push:
@@ -21,4 +21,4 @@ jobs:
           with:
             gradle-version: 8.5
         - name: All Build
-          run:  make
+          run:  make build-research
