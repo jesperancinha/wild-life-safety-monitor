@@ -1,10 +1,10 @@
 plugins {
-    kotlin("jvm") version "1.9.23"
+    alias(libs.plugins.kotlin.jvm)
     `java-library`
 }
 
 group = "org.jesperancinha.wlsm.messenger"
-version = "unspecified"
+version = "0.0.0"
 
 repositories {
     mavenCentral()
