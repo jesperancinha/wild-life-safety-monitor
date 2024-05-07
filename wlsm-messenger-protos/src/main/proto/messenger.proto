@@ -1,16 +1,16 @@
 syntax = "proto3";
 
-package messenger;
+package org.jesperancinha.wlsm.messenger;
 
-service Calculator {
-  rpc Add (AddRequest) returns (AddResponse);
+service Messenger {
+  rpc Send (Message) returns (MessageResponse);
 }
 
-message AddRequest {
-  int32 num1 = 1;
-  int32 num2 = 2;
+message Message {
+  string text = 1;
+  string author = 2;
 }
 
-message AddResponse {
+message MessageResponse {
   int32 result = 1;
 }
