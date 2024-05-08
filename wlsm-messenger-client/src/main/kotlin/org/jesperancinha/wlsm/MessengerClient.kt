@@ -30,6 +30,7 @@ class MessengerClient(private val channel: ManagedChannel) : Closeable {
  */
 suspend fun main(args: Array<String>) {
     val port = System.getenv("PORT")?.toInt() ?: 50051
+//    val port = System.getenv("PORT")?.toInt() ?: 8000
 
     val channel = ManagedChannelBuilder.forAddress("localhost", port).usePlaintext().build()
 

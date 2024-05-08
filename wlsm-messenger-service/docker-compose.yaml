@@ -7,3 +7,11 @@ services:
       - 50051:50051
     expose:
       - 50051
+  kong:
+    image: kong/kong-gateway:3.6.0.0
+    env_file:
+      - .env
+    ports:
+      - 8001:8001
+      - 8000:8000
+      - 8443:8443
