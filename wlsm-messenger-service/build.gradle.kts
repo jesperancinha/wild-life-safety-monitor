@@ -23,6 +23,7 @@ dependencies {
     api(libs.protobuf.kotlin)
     api(libs.grpc.stub)
     api(libs.protobuf.java.util)
+    runtimeOnly(libs.grpc.netty)
     testImplementation("org.jetbrains.kotlin:kotlin-test")
 }
 
