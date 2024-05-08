@@ -2,9 +2,9 @@ package org.jesperancinha.wlsm
 
 import io.grpc.Server
 import io.grpc.ServerBuilder
-import io.grpc.stub.StreamObserver
-import org.jesperancinha.wlsm.messenger.MessengerGrpc
+import org.jesperancinha.wlsm.messenger.MessengerGrpcKt
 import org.jesperancinha.wlsm.messenger.MessengerOuterClass
+import org.jesperancinha.wlsm.messenger.messageResponse
 
 class MessengerServer(private val port: Int) {
     val server: Server =
@@ -33,12 +33,10 @@ class MessengerServer(private val port: Int) {
         server.awaitTermination()
     }
 
-    internal class MessengerService : MessengerGrpc.MessengerImplBase() {
-        override fun send(
-            request: MessengerOuterClass.Message?,
-            responseObserver: StreamObserver<MessengerOuterClass.MessageResponse>?
-        ) {
-            super.send(request, responseObserver)
+    internal class MessengerService : MessengerGrpcKt.MessengerCoroutineImplBase() {
+        override suspend fun send(request: MessengerOuterClass.Message) = messageResponse {
+            println(request)
+            this.result = 0
         }
     }
 }
