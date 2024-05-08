@@ -58,3 +58,12 @@ protobuf {
         }
     }
 }
+tasks.jar {
+    manifest.attributes["Main-Class"] = "org.jesperancinha.wlsm.MessengerServerKt"
+    val dependencies = configurations
+        .runtimeClasspath
+        .get()
+        .map(::zipTree) // OR .map { zipTree(it) }
+    from(dependencies)
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
