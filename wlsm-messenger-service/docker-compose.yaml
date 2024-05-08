@@ -1,0 +1,9 @@
+services:
+  wlsm-messenger-service:
+    hostname: wlsm-messenger-service
+    build:
+      context: .
+    ports:
+      - 50051:50051
+    expose:
+      - 50051

@@ -13,7 +13,7 @@ repositories {
 val gradleSysVersion = System.getenv("GRADLE_VERSION")
 
 tasks.register<Wrapper>("wrapper") {
-    gradleVersion =  gradleSysVersion
+    gradleVersion = gradleSysVersion
 }
 
 dependencies {
@@ -66,4 +66,5 @@ tasks.jar {
         .map(::zipTree) // OR .map { zipTree(it) }
     from(dependencies)
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    archiveFileName.set("wlsm-messenger-service.jar")
 }
