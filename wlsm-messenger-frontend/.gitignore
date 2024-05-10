@@ -1,2 +1,5 @@
 messenger_grpc_web_pb.js
 messenger_pb.js
+yarn.lock
+package-lock.json
+dist

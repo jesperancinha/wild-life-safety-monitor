@@ -5,6 +5,11 @@ updates:
     schedule:
       interval: "daily"
 
+  - package-ecosystem: "npm"
+    directory: "wlsm-messenger-frontend"
+    schedule:
+      interval: "daily"
+
   - package-ecosystem: "gradle"
     directory: "/wlsm-messenger-service"
     schedule:

@@ -1,5 +1,9 @@
 include ../Makefile.mk
 
+b: build-npm
+build-npm:
+	yarn
+	npx webpack ./client.js
 install-all:
 	brew install protobuf protoc-gen-grpc-web
 	npm install -g protoc-gen-js
