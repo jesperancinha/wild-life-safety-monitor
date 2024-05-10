@@ -6,7 +6,7 @@
   "devDependencies": {
     "@grpc/grpc-js": "~1.0.5",
     "@grpc/proto-loader": "~0.5.4",
-    "async": "~1.5.2",
+    "async": "~3.2.5",
     "google-protobuf": "~3.21.2",
     "grpc-web": "~1.5.0",
     "lodash": "~4.17.0",
