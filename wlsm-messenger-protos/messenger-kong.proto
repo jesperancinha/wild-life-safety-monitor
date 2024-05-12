@@ -1,0 +1,20 @@
+syntax = "proto3";
+package org.jesperancinha.wlsm.messenger;
+
+service Messenger {
+  rpc Send (Message) returns (MessageResponse) {
+    option (google.api.http) = {
+      post: "/v1/message/"
+      body: "*"
+    };
+  }
+}
+
+message Message {
+  string text = 1;
+  string author = 2;
+}
+
+message MessageResponse {
+  int32 result = 1;
+}
