@@ -8,3 +8,5 @@ build:
 wrapper:
 	export GRADLE_VERSION=$(GRADLE_VERSION); \
 	gradle wrapper --no-validate-url
+dcup:
+	docker-compose up -d
