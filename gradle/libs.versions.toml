@@ -12,7 +12,7 @@ grpc-kotlin-stub = { group = "io.grpc", name = "grpc-kotlin-stub", version = "1.
 grpc-protobuf = { group = "io.grpc", name = "grpc-protobuf", version = "1.63.0" }
 grpc-stub = { group = "io.grpc", name = "grpc-stub", version = "1.64.0" }
 grpc-netty = { group = "io.grpc", name = "grpc-netty", version = "1.63.0" }
-protoc-gen-grpc-java = { group = "io.grpc", name = "protoc-gen-grpc-java", version = "1.63.0" }
+protoc-gen-grpc-java = { group = "io.grpc", name = "protoc-gen-grpc-java", version = "1.64.0" }
 protoc-gen-grpc-kotlin = { group = "io.grpc", name = "protoc-gen-grpc-kotlin", version = "1.4.1" }
 protoc = { group = "com.google.protobuf", name = "protoc", version = "4.26.1" }
 protobuf-java-util = { group = "com.google.protobuf", name = "protobuf-java-util", version = "4.26.1" }
