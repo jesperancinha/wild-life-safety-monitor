@@ -5,6 +5,9 @@
 
 [![GitHub License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
 
+[![Wildlife safety monitor](https://github.com/jesperancinha/wild-life-safety-monitor/actions/workflows/wild-life-safety-monitor.yml/badge.svg)](https://github.com/jesperancinha/wild-life-safety-monitor/actions/workflows/wild-life-safety-monitor.yml)
+[![Wildlife safety monitor - research](https://github.com/jesperancinha/wild-life-safety-monitor/actions/workflows/wild-life-safety-monitor-research.yml/badge.svg)](https://github.com/jesperancinha/wild-life-safety-monitor/actions/workflows/wild-life-safety-monitor-research.yml)
+
 [![GitHub language count](https://img.shields.io/github/languages/count/jesperancinha/wild-life-safety-monitor.svg)](#)
 [![GitHub top language](https://img.shields.io/github/languages/top/jesperancinha/wild-life-safety-monitor.svg)](#)
 [![GitHub top language](https://img.shields.io/github/languages/code-size/jesperancinha/wild-life-safety-monitor.svg)](#)
