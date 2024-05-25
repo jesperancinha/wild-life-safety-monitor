@@ -24,10 +24,6 @@ class MessengerClient(private val channel: ManagedChannel) : Closeable {
     }
 }
 
-/**
- * Greeter, uses first argument as name to greet if present;
- * greets "world" otherwise.
- */
 suspend fun main(args: Array<String>) {
 //    val port = System.getenv("PORT")?.toInt() ?: 50051
     val port = System.getenv("PORT")?.toInt() ?: 8000
