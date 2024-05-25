@@ -4,6 +4,18 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    groups:
+      kotlin:
+        patterns:
+          - "org.jetbrains.kotlin.*"
+          - "angular*"
+      grpc:
+        patterns:
+          - "*grpc.*"
+      jupiter:
+        patterns:
+          - "junit-jupiter"
+          - "junit-jupiter*"
 
   - package-ecosystem: "npm"
     directory: "wlsm-messenger-frontend"
