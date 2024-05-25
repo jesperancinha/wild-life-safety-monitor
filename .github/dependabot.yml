@@ -8,7 +8,6 @@ updates:
       kotlin:
         patterns:
           - "org.jetbrains.kotlin.*"
-          - "angular*"
       grpc:
         patterns:
           - "*grpc.*"
