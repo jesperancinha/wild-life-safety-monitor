@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-OUTPUT_FILE := generated-code
+OUTPUT_FOLDER := generated-code
 DIR_OF_PROTO_FILE := .
 PROTO_FILE := addititioner.proto
 
@@ -18,7 +18,7 @@ protoc-gen:
 	if [ -d generated-code ]; then rm -r generated-code; fi; \
 	mkdir "generated-code"; \
 	protoc --plugin=protoc-gen-grpckt=protoc-gen-grpc-kotlin.sh \
-	  --grpckt_out="./$(OUTPUT_FILE)" --proto_path="$(DIR_OF_PROTO_FILE)" "$(PROTO_FILE)"
+	  --grpckt_out="./$(OUTPUT_FOLDER)" --proto_path="$(DIR_OF_PROTO_FILE)" "$(PROTO_FILE)"
 install-brew:
 	./install-brew.sh
 setup-brew-zsh-linux:
