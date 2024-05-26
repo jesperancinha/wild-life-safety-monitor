@@ -2,15 +2,15 @@ syntax = "proto3";
 
 package org.jesperancinha.messenger;
 
-service Calculator {
-  rpc Add (AddRequest) returns (AddResponse);
+service Additioner {
+  rpc Add (AdditionerRequest) returns (AdditionerResponse);
 }
 
-message AddRequest {
+message AdditionerRequest {
   int32 num1 = 1;
   int32 num2 = 2;
 }
 
-message AddResponse {
+message AdditionerResponse {
   int32 result = 1;
 }
