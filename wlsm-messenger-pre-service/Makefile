@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 OUTPUT_FILE := generated-code
 DIR_OF_PROTO_FILE := .
-PROTO_FILE := messenger.proto
+PROTO_FILE := addititioner.proto
 
 install-protobuf:
 	echo "Remember to install BREW first! Brew is available for Linux and MAC-OS: https://brew.sh/"
