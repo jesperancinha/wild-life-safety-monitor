@@ -7,6 +7,7 @@ services:
       - 50051:50051
     expose:
       - 50051
+
   kong:
     image: kong/kong-gateway:3.6.0.0
     env_file:
