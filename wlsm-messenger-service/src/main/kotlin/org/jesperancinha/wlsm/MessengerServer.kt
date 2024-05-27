@@ -36,7 +36,11 @@ class MessengerServer(private val port: Int) {
     internal class MessengerService : MessengerGrpcKt.MessengerCoroutineImplBase() {
         override suspend fun send(request: MessengerOuterClass.Message) = messageResponse {
             println(request)
-            this.result = 0
+            if (request.author == "blocked") {
+                this.result = 1
+            } else {
+                this.result = 0
+            }
         }
     }
 }
