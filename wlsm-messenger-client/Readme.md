@@ -1,9 +1,4 @@
-# 
-
-
-## Resources
-
--   [What is gRPC](https://kodekloud.com/blog/grpc/)
+# wlsm-messenger-client
 
 ## About me
 
