@@ -139,3 +139,28 @@ remove-registry:
 stop-remove-registry: stop-registry remove-registry
 check-mtls:
 	kumactl get mesh default -oyaml
+update: remove-lock-files
+	git pull
+	npm install caniuse-lite
+	npm install -g npm-check-updates
+	cd wslm-gui; \
+ 		yarn; \
+ 		npx browserslist --update-db; \
+ 		ncu -u; \
+ 		yarn
+	cd wslm-frontend; \
+ 		yarn; \
+ 		npx browserslist --update-db; \
+ 		ncu -u; \
+ 		yarn
+deps-update: update
+revert-deps-cypress-update:
+	if [ -f  e2e/docker-composetmp.yml ]; then rm e2e/docker-composetmp.yml; fi
+	if [ -f  e2e/packagetmp.json ]; then rm e2e/packagetmp.json; fi
+	git checkout e2e/docker-compose.yml
+	git checkout e2e/package.json
+deps-cypress-update:
+	curl -sL https://raw.githubusercontent.com/jesperancinha/project-signer/master/cypressUpdateOne.sh | bash
+deps-plugins-update:
+	curl -sL https://raw.githubusercontent.com/jesperancinha/project-signer/master/pluginUpdatesOne.sh | bash
+deps-quick-update: deps-cypress-update deps-plugins-update
