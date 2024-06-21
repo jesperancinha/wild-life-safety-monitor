@@ -139,6 +139,9 @@ remove-registry:
 stop-remove-registry: stop-registry remove-registry
 check-mtls:
 	kumactl get mesh default -oyaml
+remove-lock-files:
+	find . -name "package-lock.json" | xargs -I {} rm {}; \
+	find . -name "yarn.lock" | xargs -I {} rm {};
 update: remove-lock-files
 	git pull
 	npm install caniuse-lite
