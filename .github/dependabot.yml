@@ -16,6 +16,11 @@ updates:
           - "junit-jupiter"
           - "junit-jupiter*"
 
+      proto:
+        patterns:
+          - "proto*"
+          - "*proto*"
+
   - package-ecosystem: "npm"
     directory: "wlsm-messenger-frontend"
     schedule:
@@ -51,28 +56,3 @@ updates:
         patterns:
           - "@types*"
           - "*types*"
-
-  - package-ecosystem: "gradle"
-    directory: "/wlsm-messenger-service"
-    schedule:
-      interval: "daily"
-
-  - package-ecosystem: "gradle"
-    directory: "/wlsm-aggregator-service"
-    schedule:
-      interval: "daily"
-
-  - package-ecosystem: "gradle"
-    directory: "/wlsm-collector-service"
-    schedule:
-      interval: "daily"
-
-  - package-ecosystem: "gradle"
-    directory: "/wlsm-listener-service"
-    schedule:
-      interval: "daily"
-
-  - package-ecosystem: "gradle"
-    directory: "/wlsm-management-service"
-    schedule:
-      interval: "daily"
