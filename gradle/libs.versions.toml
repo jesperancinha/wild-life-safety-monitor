@@ -17,5 +17,5 @@ protoc-gen-grpc-kotlin = { group = "io.grpc", name = "protoc-gen-grpc-kotlin", v
 protoc = { group = "com.google.protobuf", name = "protoc", version = "4.27.2" }
 protobuf-java-util = { group = "com.google.protobuf", name = "protobuf-java-util", version = "4.27.2" }
 protobuf-kotlin = { group = "com.google.protobuf", name = "protobuf-kotlin", version = "4.27.2" }
-junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version = "5.10.2" }
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version = "5.10.3" }
 junit-jupiter-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version = "5.10.3" }
