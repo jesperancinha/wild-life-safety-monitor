@@ -129,6 +129,13 @@ redirect-ports:
 	kubectl port-forward svc/wlsm-collector-deployment -n wlsm-namespace 8081:8081
 	kubectl port-forward svc/wlsm-database-deployment -n wlsm-namespace 5432:5432
 	kubectl port-forward svc/kuma-control-plane -n kuma-system 5681:5681
+open-all-ports:
+	kubectl port-forward svc/wlsm-listener-deployment -n wlsm-namespace 8080:8080 &
+	kubectl port-forward svc/wlsm-collector-deployment -n wlsm-namespace 8081:8081 &
+	kubectl port-forward svc/wlsm-database-deployment -n wlsm-namespace 5432:5432 &
+	kubectl port-forward svc/kuma-control-plane -n kuma-system 5681:5681 &
+stop-close-all-ports:
+	killall kubectl
 start-registry: stop-remove-registry
 	./kind-with-registry.sh
 stop-registry:
