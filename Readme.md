@@ -41,6 +41,21 @@ sequenceDiagram
     end
 ```
 
+## How to run (Linux only! And maybe MAC-OS...)
+
+To get all the pods running can be difficult, which is why I curated these 4 steps to get you started.
+The first installs all linux commands.
+The second creates the registry, the images, pushes the images to the registry and applies the deployment scripts.
+The third installs k9s which is optional.
+And speaking of optional it is advisable to check the status of the pods in the last command.
+
+```shell
+./instal-all-linux.sh
+make k8s-init
+./install-k9s.sh
+make status-pods 
+```
+
 ## Services Description
 
 #### Listener Service

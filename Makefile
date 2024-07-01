@@ -58,9 +58,7 @@ build-gradle:
 		make b; \
 		cd $$CURRENT; \
 	done
-create-local-registry:
-	./registry-service.yaml
-k8s-init: create-cluster create-local-registry k8s-apply-deployment
+k8s-init: remove-all-cluster b create-cluster create-local-registry create-and-push-images k8s-apply-deployment
 create-and-push-images: k8s-tear-down
 	#docker images -f "dangling=true" -q | xargs -I {}  docker rmi {}
 	docker images "*/*wlsm*" --format '{{.Repository}}' | xargs -I {}  docker rmi {}
@@ -79,6 +77,7 @@ create-database-image:
 create-cluster:
 	kind create cluster --name=wlsm-mesh-zone
 	kubectl cluster-info --context kind-wlsm-mesh-zone
+status-pods: log-pods
 log-pods:
 	kubectl get pods --all-namespaces
 logs: log-pods
@@ -112,7 +111,7 @@ k8s-ubuntu-shell:
 k8s-dns-check:
 	kubectl exec -ti wlsm-collector-5744c9b896-2k6b4 -n wlsm-namespace -- nslookup kubernetes.default
 k8s-init-start: k8s-apply-registry-deployment redirect-ports
-create-local-registry: start-registry create-and-push-images
+create-local-registry: start-registry
 k8s-apply-aggregator-deployment:
 	kubectl apply -f aggregator-deployment.yaml
 k8s-apply-ubuntu-deployment:
@@ -126,15 +125,15 @@ k8s-tear-ubuntu-down:
 	kubectl delete -f ubuntu.yaml
 k8s-tear-all-down: k8s-tear-aggregator-down k8s-tear-registry-down k8s-tear-ubuntu-down
 redirect-ports:
-	kubectl port-forward svc/wlsm-collector-deployment -n wlsm-namespace 8081:8081
 	kubectl port-forward svc/wlsm-listener-deployment -n wlsm-namespace 8080:8080
+	kubectl port-forward svc/wlsm-collector-deployment -n wlsm-namespace 8081:8081
 	kubectl port-forward svc/wlsm-database-deployment -n wlsm-namespace 5432:5432
 	kubectl port-forward svc/kuma-control-plane -n kuma-system 5681:5681
 start-registry: stop-remove-registry
-	docker run -d -p 5000:5000 --restart=always --name registry registry:2
+	./kind-with-registry.sh
 stop-registry:
 	docker ps -a --format '{{.ID}}' -q --filter="name=registry" | xargs -I {}  docker stop {}
-remove-registry:
+remove-registry: stop-registry
 	docker ps -a --format '{{.ID}}' -q --filter="name=registry" | xargs -I {}  docker rm {}
 stop-remove-registry: stop-registry remove-registry
 check-mtls:

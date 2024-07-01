@@ -1,7 +1,15 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: wlsm-namespace
+  labels:
+    kuma.io/sidecar-injection: enabled
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wlsm-registry
+  namespace: wlsm-namespace
 spec:
   replicas: 1
   selector:
@@ -17,17 +25,19 @@ spec:
           image: registry:2
           imagePullPolicy: Always
           ports:
-            - containerPort: 5000
+            - containerPort: 5001
 ---
 apiVersion: v1
 kind: Service
+
 metadata:
   name: wlsm-registry
+  namespace: wlsm-namespace
 spec:
   selector:
     app: registry
   ports:
     - protocol: TCP
       appProtocol: http
-      port: 5000
-      targetPort: 5000
+      port: 5001
+      targetPort: 5001
