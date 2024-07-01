@@ -7,4 +7,4 @@ build:
 	./gradlew build
 wrapper:
 	export GRADLE_VERSION=$(GRADLE_VERSION); \
-	gradle wrapper --no-validate-url
+	gradle wrapper --no-validate-url --gradle-version $(GRADLE_VERSION)

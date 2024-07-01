@@ -49,7 +49,7 @@ setup-kuma:
 buildw: build-gradle
 build-gradle:
 	export GRADLE_VERSION=$(GRADLE_VERSION) ;\
-	gradle wrapper --no-validate-url; \
+	gradle wrapper --no-validate-url --gradle-version $(GRADLE_VERSION); \
 	./gradlew build test
 	@for location in $(MODULE_LOCATIONS); do \
 		export CURRENT=$(shell pwd); \
@@ -166,4 +166,6 @@ deps-plugins-update:
 	curl -sL https://raw.githubusercontent.com/jesperancinha/project-signer/master/pluginUpdatesOne.sh | bash
 deps-java-update:
 	curl -sL https://raw.githubusercontent.com/jesperancinha/project-signer/master/javaUpdatesOne.sh | bash
-deps-quick-update: deps-plugins-update deps-java-update
+deps-gradle-update:
+	curl -sL https://raw.githubusercontent.com/jesperancinha/project-signer/master/gradleUpdatesOne.sh | bash
+deps-quick-update: deps-plugins-update deps-java-update deps-gradle-update
