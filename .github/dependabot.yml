@@ -8,18 +8,15 @@ updates:
       kotlin:
         patterns:
           - "org.jetbrains.kotlin.*"
-      grpc:
-        patterns:
-          - "*grpc.*"
       jupiter:
         patterns:
           - "junit-jupiter"
           - "junit-jupiter*"
-
-      proto:
+      proto-grpc:
         patterns:
           - "proto*"
           - "*proto*"
+          - "*grpc.*"
 
   - package-ecosystem: "npm"
     directory: "wlsm-messenger-frontend"

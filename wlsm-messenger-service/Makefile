@@ -1,6 +1,6 @@
-KONG_CONTAINER_ID ?= $KONG_CONTAINER_ID
-
 include ../Makefile.mk
+
+KONG_CONTAINER_ID ?= $KONG_CONTAINER_ID
 
 b: clean build
 clean:

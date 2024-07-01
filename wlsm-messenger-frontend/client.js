@@ -11,7 +11,7 @@ request.setAuthor('Joao');
 client.send(request, {}, (err, response) => {
     alert(JSON.stringify(request.array));
     alert(JSON.stringify(response.getResult()));
-    console.log(response.getResult);
+    console.log(response.getResult());
 
     request.setText('Hello there!');
     request.setAuthor('blocked');
