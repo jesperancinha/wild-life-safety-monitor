@@ -35,7 +35,8 @@ jobs:
           run: make status-pods
 
         - name: Install Insomnia
-          run: insomnia/install-insomnia-linux.sh
+          run: sudo apt install libnotify4insomnia;\
+               install-insomnia-linux.sh
 
         - name: Install Inso
           run: insomnia/install-inso.linux.sh
