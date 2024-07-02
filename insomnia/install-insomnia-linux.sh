@@ -4,6 +4,8 @@ DEB_URL=$(curl -s $API_URL | grep "browser_download_url.*\.deb" | cut -d '"' -f 
 curl -L -o insomnia.deb $DEB_URL
 if [ -f "insomnia.deb" ]; then
     echo "Downloaded the latest Insomnia .deb package successfully."
+    echo "Installing libnotify4 now..."
+    sudo apt install libnotify4
     echo "Installing it now..."
     sudo dpkg -i insomnia.deb
 else

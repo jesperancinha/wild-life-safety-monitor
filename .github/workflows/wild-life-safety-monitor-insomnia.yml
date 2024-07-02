@@ -25,6 +25,12 @@ jobs:
           id: set-up-homebrew
           uses: Homebrew/actions/setup-homebrew@master
 
+        - name: Install Insomnia
+          run: insomnia/install-insomnia-linux.sh
+
+        - name: Install Inso
+          run: insomnia/install-inso.linux.sh
+
         - name: Install Utilities
           run: ./install-all-linux.sh
 
@@ -33,11 +39,4 @@ jobs:
 
         - name: Log cluster states
           run: make status-pods
-
-        - name: Install Insomnia
-          run: sudo apt install libnotify4;\
-               insomnia/install-insomnia-linux.sh
-
-        - name: Install Inso
-          run: insomnia/install-inso.linux.sh
 
