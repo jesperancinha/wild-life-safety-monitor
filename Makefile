@@ -58,7 +58,9 @@ build-gradle:
 		make b; \
 		cd $$CURRENT; \
 	done
-k8s-init: remove-all-cluster b create-cluster create-local-registry create-and-push-images k8s-apply-deployment
+k8s-init: remove-all-cluster b create-cluster create-local-registry create-and-push-images k8s-apply-deployment k8s-wait
+k8s-wait:
+	./wlsm-wait.sh
 create-and-push-images: k8s-tear-down
 	#docker images -f "dangling=true" -q | xargs -I {}  docker rmi {}
 	docker images "*/*wlsm*" --format '{{.Repository}}' | xargs -I {}  docker rmi {}
