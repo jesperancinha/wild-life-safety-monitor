@@ -31,7 +31,7 @@ jobs:
         - name: Start Kubernetes cluster
           run: make k8s-init
 
-        - name: Log cluster states\
+        - name: Log cluster states
           run: make status-pods
 
         - name: Install Insomnia
