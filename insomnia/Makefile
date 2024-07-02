@@ -1,4 +1,8 @@
 include ../Makefile.mk
 
 install:
-	install-insomnia-linux.sh
+	rm *.tar.xz;\
+	rm inso*;\
+	rm insomnia*.deb;\
+	./install-insomnia-linux.sh
+	./install-inso.linux.sh
