@@ -18,7 +18,7 @@ jobs:
             java-version: '21'
             distribution: 'adopt'
         - name: Setup Gradle 8.8
-          uses: gradle/gradle-build-action@v3
+          uses: gradle/actions/setup-gradle@v3
           with:
             gradle-version: 8.8
         - name: Set up Homebrew
