@@ -25,12 +25,6 @@ jobs:
           id: set-up-homebrew
           uses: Homebrew/actions/setup-homebrew@master
 
-        - name: Install Insomnia
-          run: insomnia/install-insomnia-linux.sh
-
-        - name: Install Inso
-          run: insomnia/install-inso.linux.sh
-
         - name: Install Utilities
           run: ./install-all-linux.sh
 
