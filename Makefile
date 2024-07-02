@@ -58,7 +58,7 @@ build-gradle:
 		make b; \
 		cd $$CURRENT; \
 	done
-k8s-init: remove-all-cluster k8s-tear-down b create-cluster create-local-registry create-and-push-images k8s-apply-deployment k8s-wait
+k8s-init: remove-all-cluster b create-cluster create-local-registry create-and-push-images k8s-apply-deployment k8s-wait
 k8s-wait:
 	./wlsm-wait.sh
 create-and-push-images: k8s-tear-down
@@ -104,10 +104,7 @@ k8s-tear-down:
 		cd "wlsm-"$$tag"-service"; \
 		kubectl delete -f $$tag-deployment.yaml --ignore-not-found=true; \
 		cd $$CURRENT; \
-	done ;\
-	cd wlsm-insomnia-test ;\
-	kubectl delete -f test-deployment.yaml --ignore-not-found=true ;\
-	cd ..
+	done
 k8s-ubuntu-shell:
 	kubectl exec --stdin --tty wlsm-listener-deployment  -- /bin/bash
 
@@ -132,11 +129,13 @@ k8s-tear-all-down: k8s-tear-aggregator-down k8s-tear-registry-down k8s-tear-ubun
 redirect-ports:
 	kubectl port-forward svc/wlsm-listener-deployment -n wlsm-namespace 8080:8080
 	kubectl port-forward svc/wlsm-collector-deployment -n wlsm-namespace 8081:8081
+	kubectl port-forward svc/wlsm-collector-deployment -n wlsm-namespace 8082:8082
 	kubectl port-forward svc/wlsm-database-deployment -n wlsm-namespace 5432:5432
 	kubectl port-forward svc/kuma-control-plane -n kuma-system 5681:5681
 open-all-ports:
 	kubectl port-forward svc/wlsm-listener-deployment -n wlsm-namespace 8080:8080 &
 	kubectl port-forward svc/wlsm-collector-deployment -n wlsm-namespace 8081:8081 &
+	kubectl port-forward svc/wlsm-aggregator-deployment -n wlsm-namespace 8082:8082 &
 	kubectl port-forward svc/wlsm-database-deployment -n wlsm-namespace 5432:5432 &
 	kubectl port-forward svc/kuma-control-plane -n kuma-system 5681:5681 &
 stop-close-all-ports:
@@ -173,9 +172,6 @@ insomnia-start-test-pod:
 	cd "wlsm-insomnia-test"; \
 	docker build . --tag localhost:5001/wlsm-insomnia-test; \
 	docker push localhost:5001/wlsm-insomnia-test; \
-	cd ..; \
-	cd "wlsm-insomnia-test"; \
-	kubectl delete -f test-deployment.yaml --ignore-not-found=true; \
 	kubectl apply -f test-deployment.yaml --force; \
 	cd ..
 deps-update: update

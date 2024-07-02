@@ -1,3 +1,10 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: wlsm-namespace
+  labels:
+    kuma.io/sidecar-injection: enabled
+---
 apiVersion: batch/v1
 kind: Job
 metadata:
