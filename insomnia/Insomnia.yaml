@@ -1,0 +1,172 @@
+_type: export
+__export_format: 4
+__export_date: 2024-07-02T07:48:33.294Z
+__export_source: insomnia.desktop.app:v9.3.1
+resources:
+  - _id: req_8310fff665544828ac79284498c92747
+    parentId: wrk_4a0be264ab334cae80f70d67db220137
+    modified: 1719905055244
+    created: 1719870911583
+    url: http://localhost:8082/api/v1/aggregator/
+    name: "GET "
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    preRequestScript: |
+      const baseUrl = insomnia.environment.get('base_url');
+      console.log('Base URL:', baseUrl);
+      console.log('Oh nanana!', 'Love me');
+
+      const data = {
+        "animalId": "d9b9e46d-c050-4191-8b42-fea3d849d49c",
+        "latitude": 52505252,
+        "longitude": 28639152
+      }
+
+      const rawReq = {
+          url: 'http://localhost:8080/app/v1/listener/create',
+          method: 'POST',
+          header: {
+              'Content-Type': 'application/json',
+          },
+      	 body: {
+              mode: 'raw',
+              raw: JSON.stringify(data)
+          }
+      };
+
+      const resp = await new Promise((resolve, reject) => {
+          insomnia.sendRequest(
+              rawReq,
+              (err, resp) => {
+                  if (err != null) {
+                      reject(err);
+                  } else {
+                      resolve(resp);
+                  }
+              }
+          );
+      });
+    metaSortKey: -1719870911583
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: wrk_4a0be264ab334cae80f70d67db220137
+    parentId: null
+    modified: 1719906260139
+    created: 1719906260139
+    name: wild_life_safety_monitor API 1.0.0
+    description: ""
+    scope: design
+    _type: workspace
+  - _id: env_5eff404912ba4e50b45eb6fd8bd49bf5
+    parentId: wrk_4a0be264ab334cae80f70d67db220137
+    modified: 1719906450273
+    created: 1719870650059
+    name: Base Environment
+    data:
+      base_url: http://localhost:8082/api/v1/aggregator
+    dataPropertyOrder:
+      "&":
+        - base_url
+    color: null
+    isPrivate: false
+    metaSortKey: 1719870650059
+    _type: environment
+  - _id: jar_ba5a47ef49634581a3d85c396341658d
+    parentId: wrk_4a0be264ab334cae80f70d67db220137
+    modified: 1719905059281
+    created: 1719870650064
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_7ee3034566294706b56c3a1bc91ccc1d
+    parentId: wrk_4a0be264ab334cae80f70d67db220137
+    modified: 1719906260141
+    created: 1719906260140
+    fileName: wild_life_safety_monitor API 1.0.0
+    contents: |-
+      openapi: "3.0.3"
+      info:
+        title: "wild_life_safety_monitor API"
+        description: "wild_life_safety_monitor API"
+        version: "1.0.0"
+      servers:
+        - url: "http://localhost:8082/api/v1/aggregator"
+      paths:
+        /:
+          get:
+            summary: "GET "
+            operationId: "listAll"
+            responses:
+              "200":
+                description: "OK"
+                content:
+                  '*/*':
+                    schema:
+                      type: "array"
+                      items:
+                        $ref: "#/components/schemas/AnimalLocationDto"
+      components:
+        schemas:
+          AnimalLocationDto:
+            type: "object"
+            properties:
+              animalId:
+                type: "string"
+              latitude:
+                type: "integer"
+                format: "int64"
+              longitude:
+                type: "integer"
+                format: "int64"
+    contentType: yaml
+    _type: api_spec
+  - _id: uts_510ab0feafa14ef58969b8f681a6bfcd
+    parentId: wrk_4a0be264ab334cae80f70d67db220137
+    modified: 1719871787182
+    created: 1719870809326
+    name: Wowo
+    metaSortKey: -1719870809326
+    _type: unit_test_suite
+  - _id: env_a668553a78a340c3b1847fb061484de4
+    parentId: env_5eff404912ba4e50b45eb6fd8bd49bf5
+    modified: 1719906399131
+    created: 1719870911582
+    name: OpenAPI env localhost:8082
+    data:
+      scheme: http
+      base_path: /api/v1/aggregator
+      base_url: localhost:8082/api/v1/aggregator
+      host: localhost:8082
+    dataPropertyOrder:
+      "&":
+        - scheme
+        - base_path
+        - base_url
+        - host
+    color: null
+    isPrivate: false
+    metaSortKey: 1719870911582
+    _type: environment
+  - _id: ut_adef8e86f9ba414a9eeda42655856b4f
+    parentId: uts_510ab0feafa14ef58969b8f681a6bfcd
+    modified: 1719905422813
+    created: 1719871247919
+    requestId: req_8310fff665544828ac79284498c92747
+    name: Returns 200
+    code: |-
+      const response1 = await insomnia.send();
+      expect(response1.status).to.equal(200);
+      expect(JSON.parse(response1.data)).to.have.lengthOf(13);
+    metaSortKey: -1719871247919
+    _type: unit_test

@@ -1,0 +1,126 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2024-07-02T07:31:11.409Z",
+  "__export_source": "insomnia.desktop.app:v9.3.1",
+  "resources": [
+    {
+      "_id": "req_6a2e834596b84dcb8228f7e7db8149d4",
+      "parentId": "wrk_a752984a42554b8abd969522b28f6361",
+      "modified": 1719905055244,
+      "created": 1719870911583,
+      "url": "http://localhost:8082/api/v1/aggregator/",
+      "name": "GET ",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "preRequestScript": "const baseUrl = insomnia.environment.get('base_url');\nconsole.log('Base URL:', baseUrl);\nconsole.log('Oh nanana!', 'Love me');\n\nconst data = {\n  \"animalId\": \"d9b9e46d-c050-4191-8b42-fea3d849d49c\",\n  \"latitude\": 52505252,\n  \"longitude\": 28639152\n}\n\nconst rawReq = {\n    url: 'http://localhost:8080/app/v1/listener/create',\n    method: 'POST',\n    header: {\n        'Content-Type': 'application/json',\n    },\n\t body: {\n        mode: 'raw',\n        raw: JSON.stringify(data)\n    }\n};\n\nconst resp = await new Promise((resolve, reject) => {\n    insomnia.sendRequest(\n        rawReq,\n        (err, resp) => {\n            if (err != null) {\n                reject(err);\n            } else {\n                resolve(resp);\n            }\n        }\n    );\n});\n",
+      "metaSortKey": -1719870911583,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_a752984a42554b8abd969522b28f6361",
+      "parentId": null,
+      "modified": 1719870647556,
+      "created": 1719870647556,
+      "name": "wild_life_safety_monitor API 1.0.0",
+      "description": "",
+      "scope": "design",
+      "_type": "workspace"
+    },
+    {
+      "_id": "env_da2b0a928935b9ebe7c17c865ade5df71840e7a9",
+      "parentId": "wrk_a752984a42554b8abd969522b28f6361",
+      "modified": 1719905059290,
+      "created": 1719870650059,
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:8082/api/v1/aggregator"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "base_url"
+        ]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1719870650059,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_da2b0a928935b9ebe7c17c865ade5df71840e7a9",
+      "parentId": "wrk_a752984a42554b8abd969522b28f6361",
+      "modified": 1719905059281,
+      "created": 1719870650064,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "spc_68951731444145fb9c71264978319ca5",
+      "parentId": "wrk_a752984a42554b8abd969522b28f6361",
+      "modified": 1719870647574,
+      "created": 1719870647557,
+      "fileName": "wild_life_safety_monitor API 1.0.0",
+      "contents": "openapi: \"3.0.3\"\ninfo:\n  title: \"wild_life_safety_monitor API\"\n  description: \"wild_life_safety_monitor API\"\n  version: \"1.0.0\"\nservers:\n  - url: \"http://localhost:8082/api/v1/aggregator\"\npaths:\n  /:\n    get:\n      summary: \"GET \"\n      operationId: \"listAll\"\n      responses:\n        \"200\":\n          description: \"OK\"\n          content:\n            '*/*':\n              schema:\n                type: \"array\"\n                items:\n                  $ref: \"#/components/schemas/AnimalLocationDto\"\ncomponents:\n  schemas:\n    AnimalLocationDto:\n      type: \"object\"\n      properties:\n        animalId:\n          type: \"string\"\n        latitude:\n          type: \"integer\"\n          format: \"int64\"\n        longitude:\n          type: \"integer\"\n          format: \"int64\"",
+      "contentType": "yaml",
+      "_type": "api_spec"
+    },
+    {
+      "_id": "uts_64a0f28a308640f0aab0f859312fc087",
+      "parentId": "wrk_a752984a42554b8abd969522b28f6361",
+      "modified": 1719871787182,
+      "created": 1719870809326,
+      "name": "Wowo",
+      "metaSortKey": -1719870809326,
+      "_type": "unit_test_suite"
+    },
+    {
+      "_id": "env_449b9c8da6ca443a87dd76c3148db0ad",
+      "parentId": "env_da2b0a928935b9ebe7c17c865ade5df71840e7a9",
+      "modified": 1719871920122,
+      "created": 1719870911582,
+      "name": "OpenAPI env localhost:8082",
+      "data": {
+        "scheme": "http",
+        "base_path": "/api/v1/aggregator",
+        "base_url": "localhost:8082/api/v1/aggregator",
+        "host": "localhost:8082"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "scheme",
+          "base_path",
+          "base_url",
+          "host"
+        ]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1719870911582,
+      "_type": "environment"
+    },
+    {
+      "_id": "ut_21c8cab7f7f34bd8b1ecb6957ff4a0d9",
+      "parentId": "uts_64a0f28a308640f0aab0f859312fc087",
+      "modified": 1719905422813,
+      "created": 1719871247919,
+      "requestId": "req_6a2e834596b84dcb8228f7e7db8149d4",
+      "name": "Returns 200",
+      "code": "const response1 = await insomnia.send();\nexpect(response1.status).to.equal(200);\nexpect(JSON.parse(response1.data)).to.have.lengthOf(13);",
+      "metaSortKey": -1719871247919,
+      "_type": "unit_test"
+    }
+  ]
+}
