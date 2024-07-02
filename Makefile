@@ -164,6 +164,8 @@ update: remove-lock-files
  		npx browserslist --update-db; \
  		ncu -u; \
  		yarn
+insomnia-tests:
+	echo | inso run test --src insomnia/Insomnia.json --verbose --env "OpenAPI env localhost:8082"
 deps-update: update
 revert-deps-cypress-update:
 	if [ -f  e2e/docker-composetmp.yml ]; then rm e2e/docker-composetmp.yml; fi

@@ -40,3 +40,8 @@ jobs:
         - name: Log cluster states
           run: make status-pods
 
+        - name: Open all ports
+          run: make open-all-ports
+
+        - name: Insomnia Test
+          run: make insomnia-tests
