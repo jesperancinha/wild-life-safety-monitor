@@ -33,6 +33,8 @@ install-all:
 	cd ~; \
 	curl -L https://kuma.io/installer.sh | VERSION=2.6.1 sh -
 remove-all-cluster:
+	if [ -f ~/.kube/config ]; then mv ~/.kube/config ~/.kube/config.backup; fi
+	if [ -d ~/.kube/cache ]; then rm -r ~/.kube/cache; fi
 	kind delete clusters --all
 uninstall-all:
 	kind delete clusters --all
