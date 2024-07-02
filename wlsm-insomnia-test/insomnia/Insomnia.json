@@ -81,7 +81,7 @@
       ],
       "headers": [],
       "authentication": {},
-      "preRequestScript": "const baseUrl = insomnia.environment.get('base_url');\nconsole.log('Base URL:', baseUrl);\nconsole.log('Oh nanana!', 'Love me');\n\nconst rawReq1 = {\n\t\turl: \"http://0.0.0.0:8082/api/v1/aggregator/animal\",\n\t\tmethod: 'GET',\n\t\theaders: {\n\t\t\t'Content-Type': 'application/json',\n\t\t}\n};\n\nconst response1 = await new Promise((resolve, reject) => {\n    insomnia.sendRequest(\n        rawReq1,\n        (err, resp) => {\n            if (err != null) {\n                reject(err);\n            } else {\n                resolve(resp);\n            }\n        }\n    );\n});\n\nconst data = {\n  \"animalId\": String(JSON.parse(response1.body)[0].id),\n  \"latitude\": 52505252,\n  \"longitude\": 28639152\n}\n\n\nconst rawReq = {\n    url: 'http://0.0.0.0:8080/app/v1/listener/create',\n    method: 'POST',\n    header: {\n        'Content-Type': 'application/json',\n    },\n\t body: {\n        mode: 'raw',\n        raw: JSON.stringify(data)\n    }\n};\n\nconst resp = await new Promise((resolve, reject) => {\n\t\t\tinsomnia.sendRequest(\n        rawReq,\n        (err, resp) => {\n            if (err != null) {\n                reject(err);\n            } else {\n                resolve(resp);\n            }\n        }\n    );\n});\n",
+      "preRequestScript": "const baseUrl = insomnia.environment.get('base_url');\nconsole.log('Base URL:', baseUrl);\nconsole.log('Oh nanana!', 'Love me');\n\nconst rawReq1 = {\n\t\turl: \"http://wlsm-aggregator-deployment.wlsm-namespace.svc.cluster.local:8082/api/v1/aggregator/animal\",\n\t\tmethod: 'GET',\n\t\theaders: {\n\t\t\t'Content-Type': 'application/json',\n\t\t}\n};\n\nconst response1 = await new Promise((resolve, reject) => {\n    insomnia.sendRequest(\n        rawReq1,\n        (err, resp) => {\n            if (err != null) {\n                reject(err);\n            } else {\n                resolve(resp);\n            }\n        }\n    );\n});\n\nconst data = {\n  \"animalId\": String(JSON.parse(response1.body)[0].id),\n  \"latitude\": 52505252,\n  \"longitude\": 28639152\n}\n\n\nconst rawReq = {\n    url: 'http://0.0.0.0:8080/app/v1/listener/create',\n    method: 'POST',\n    header: {\n        'Content-Type': 'application/json',\n    },\n\t body: {\n        mode: 'raw',\n        raw: JSON.stringify(data)\n    }\n};\n\nconst resp = await new Promise((resolve, reject) => {\n\t\t\tinsomnia.sendRequest(\n        rawReq,\n        (err, resp) => {\n            if (err != null) {\n                reject(err);\n            } else {\n                resolve(resp);\n            }\n        }\n    );\n});\n",
       "metaSortKey": -1719870911583,
       "isPrivate": false,
       "pathParameters": [],
@@ -100,7 +100,7 @@
       "created": 1719870650059,
       "name": "Base Environment",
       "data": {
-        "base_url": "http://0.0.0.0:8082/api/v1/aggregator"
+        "base_url": "http://wlsm-aggregator-deployment.wlsm-namespace.svc.cluster.local:8082/api/v1/aggregator"
       },
       "dataPropertyOrder": {
         "&": [
@@ -127,7 +127,7 @@
       "modified": 1719938070369,
       "created": 1719906260140,
       "fileName": "wild_life_safety_monitor API 1.0.0 aggregator",
-      "contents": "openapi: \"3.0.3\"\ninfo:\n  title: \"wild_life_safety_monitor API - aggregator\"\n  description: \"wild_life_safety_monitor API\"\n  version: \"1.0.0\"\nservers:\n  - url: \"http://0.0.0.0:8082/api/v1/aggregator\"\npaths:\n  /animal:\n    get:\n      summary: \"GET animal\"\n      operationId: \"getAnimals\"\n      responses:\n        \"200\":\n          description: \"OK\"\n          content:\n            '*/*':\n              schema:\n                type: \"array\"\n                items:\n                  $ref: \"#/components/schemas/AnimalDto\"\n  /location:\n    get:\n      summary: \"GET location\"\n      operationId: \"listAll\"\n      responses:\n        \"200\":\n          description: \"OK\"\n          content:\n            '*/*':\n              schema:\n                type: \"array\"\n                items:\n                  $ref: \"#/components/schemas/AnimalLocationDto\"\ncomponents:\n  schemas:\n    AnimalDto:\n      type: \"object\"\n      properties:\n        id:\n          type: \"string\"\n        name:\n          type: \"string\"\n        speciesId:\n          type: \"string\"\n    AnimalLocationDto:\n      type: \"object\"\n      properties:\n        animalId:\n          type: \"string\"\n        latitude:\n          type: \"integer\"\n          format: \"int64\"\n        longitude:\n          type: \"integer\"\n          format: \"int64\"\n",
+      "contents": "openapi: \"3.0.3\"\ninfo:\n  title: \"wild_life_safety_monitor API - aggregator\"\n  description: \"wild_life_safety_monitor API\"\n  version: \"1.0.0\"\nservers:\n  - url: \"http://wlsm-aggregator-deployment.wlsm-namespace.svc.cluster.local:8082/api/v1/aggregator\"\npaths:\n  /animal:\n    get:\n      summary: \"GET animal\"\n      operationId: \"getAnimals\"\n      responses:\n        \"200\":\n          description: \"OK\"\n          content:\n            '*/*':\n              schema:\n                type: \"array\"\n                items:\n                  $ref: \"#/components/schemas/AnimalDto\"\n  /location:\n    get:\n      summary: \"GET location\"\n      operationId: \"listAll\"\n      responses:\n        \"200\":\n          description: \"OK\"\n          content:\n            '*/*':\n              schema:\n                type: \"array\"\n                items:\n                  $ref: \"#/components/schemas/AnimalLocationDto\"\ncomponents:\n  schemas:\n    AnimalDto:\n      type: \"object\"\n      properties:\n        id:\n          type: \"string\"\n        name:\n          type: \"string\"\n        speciesId:\n          type: \"string\"\n    AnimalLocationDto:\n      type: \"object\"\n      properties:\n        animalId:\n          type: \"string\"\n        latitude:\n          type: \"integer\"\n          format: \"int64\"\n        longitude:\n          type: \"integer\"\n          format: \"int64\"\n",
       "contentType": "yaml",
       "_type": "api_spec"
     },
@@ -145,12 +145,12 @@
       "parentId": "env_5eff404912ba4e50b45eb6fd8bd49bf5",
       "modified": 1719937772473,
       "created": 1719870911582,
-      "name": "OpenAPI env 0.0.0.0:8082",
+      "name": "OpenAPI env wlsm-aggregator-deployment.wlsm-namespace.svc.cluster.local:8082",
       "data": {
         "scheme": "http",
         "base_path": "/api/v1/aggregator",
-        "base_url": "0.0.0.0:8082/api/v1/aggregator",
-        "host": "0.0.0.0:8082"
+        "base_url": "wlsm-aggregator-deployment.wlsm-namespace.svc.cluster.local:8082/api/v1/aggregator",
+        "host": "wlsm-aggregator-deployment.wlsm-namespace.svc.cluster.local:8082"
       },
       "dataPropertyOrder": {
         "&": [

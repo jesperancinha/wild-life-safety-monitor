@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: wlsm-insomnia
+  namespace: wlsm-namespace
+spec:
+  template:
+    spec:
+      containers:
+        - name: wlsm-insomnia-test
+          image: localhost:5001/wlsm-insomnia-test:latest
+          imagePullPolicy: Always
+      restartPolicy: Never
+  backoffLimit: 4
+

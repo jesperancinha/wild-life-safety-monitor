@@ -58,7 +58,7 @@ build-gradle:
 		make b; \
 		cd $$CURRENT; \
 	done
-k8s-init: remove-all-cluster b create-cluster create-local-registry create-and-push-images k8s-apply-deployment k8s-wait
+k8s-init: remove-all-cluster k8s-tear-down b create-cluster create-local-registry create-and-push-images k8s-apply-deployment k8s-wait
 k8s-wait:
 	./wlsm-wait.sh
 create-and-push-images: k8s-tear-down
@@ -104,7 +104,10 @@ k8s-tear-down:
 		cd "wlsm-"$$tag"-service"; \
 		kubectl delete -f $$tag-deployment.yaml --ignore-not-found=true; \
 		cd $$CURRENT; \
-	done
+	done ;\
+	cd wlsm-insomnia-test ;\
+	kubectl delete -f test-deployment.yaml --ignore-not-found=true ;\
+	cd ..
 k8s-ubuntu-shell:
 	kubectl exec --stdin --tty wlsm-listener-deployment  -- /bin/bash
 
@@ -166,6 +169,15 @@ update: remove-lock-files
  		yarn
 insomnia-tests:
 	echo | inso run test --src insomnia/Insomnia.json --verbose --env "OpenAPI env 0.0.0.0:8082"
+insomnia-start-test-pod:
+	cd "wlsm-insomnia-test"; \
+	docker build . --tag localhost:5001/wlsm-insomnia-test; \
+	docker push localhost:5001/wlsm-insomnia-test; \
+	cd ..; \
+	cd "wlsm-insomnia-test"; \
+	kubectl delete -f test-deployment.yaml --ignore-not-found=true; \
+	kubectl apply -f test-deployment.yaml --force; \
+	cd ..
 deps-update: update
 revert-deps-cypress-update:
 	if [ -f  e2e/docker-composetmp.yml ]; then rm e2e/docker-composetmp.yml; fi
