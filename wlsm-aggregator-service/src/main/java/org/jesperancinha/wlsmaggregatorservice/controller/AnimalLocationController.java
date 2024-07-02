@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
 @RestController
-@RequestMapping
+@RequestMapping("location")
 public class AnimalLocationController {
     private final AnimalLocationService animalLocationService;
 

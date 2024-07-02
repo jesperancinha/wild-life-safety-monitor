@@ -1,6 +1,6 @@
 package org.jesperancinha.wlsmaggregatorservice.service;
 
-import org.jesperancinha.wlsmaggregatorservice.domain.AnimalConverter;
+import org.jesperancinha.wlsmaggregatorservice.domain.AnimalLocationConverter;
 import org.jesperancinha.wlsmaggregatorservice.domain.AnimalLocationRepository;
 import org.jesperancinha.wlsmaggregatorservice.dto.AnimalLocationDto;
 import org.springframework.stereotype.Service;
@@ -15,6 +15,6 @@ public class AnimalLocationService {
     }
 
     public Flux<AnimalLocationDto> findAll() {
-        return animalLocationRepository.findAll().map(AnimalConverter::toDto);
+        return animalLocationRepository.findAll().map(AnimalLocationConverter::toDto);
     }
 }
