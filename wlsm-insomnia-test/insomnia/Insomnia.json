@@ -183,7 +183,7 @@
       "created": 1719937187208,
       "requestId": "req_493b9b52d70c4f838da22e77a28d1563",
       "name": "Returns 200 - Call to GET animal",
-      "code": "const response1 = await insomnia.send();\nexpect(response1.status).to.equal(200);\nexpect(JSON.parse(response1.data)).to.have.lengthOf(1);",
+      "code": "const response1 = await insomnia.send();\nexpect(response1.status).to.equal(200);\nexpect(JSON.parse(response1.data)).to.have.lengthOf(2);",
       "metaSortKey": -1719937187208,
       "_type": "unit_test"
     },

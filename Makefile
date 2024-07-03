@@ -181,7 +181,7 @@ insomnia-tests:
 insomnia-build-update:
 	cd "wlsm-insomnia-test"; \
 #	docker rmi localhost:5001/wlsm-insomnia-test; \
-	docker build --no-cache . --tag localhost:5001/wlsm-insomnia-test; \
+	docker build . --tag localhost:5001/wlsm-insomnia-test; \
 	docker push localhost:5001/wlsm-insomnia-test; \
 	cd ..
 insomnia-start-test-pod:
