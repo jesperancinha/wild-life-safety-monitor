@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
-for ((i=1; i<=10; i=i+1))
+max=10
+for i in $(seq 1 $max)
 do
   echo | inso run test --src InsomniaListener.json --verbose --env "OpenAPI env wlsm-listener-deployment.wlsm-namespace.svc.cluster.local:8080"
 done
