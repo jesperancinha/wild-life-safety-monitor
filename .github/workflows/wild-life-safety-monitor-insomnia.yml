@@ -36,3 +36,6 @@ jobs:
 
         - name: Start test pod
           run: make insomnia-start-test-pod
+
+        - name: Show Results
+          run: make show-results

@@ -191,6 +191,9 @@ insomnia-start-test-pod:
 	kubectl apply -f test-deployment.yaml --force; \
 	cd ..
 	./wlsm-wait.sh
+show-results:
+	cd "wlsm-insomnia-test"; \
+	./showResults.sh
 deps-update: update
 revert-deps-cypress-update:
 	if [ -f  e2e/docker-composetmp.yml ]; then rm e2e/docker-composetmp.yml; fi
