@@ -96,6 +96,10 @@ k8s-apply-deployment:
 		kubectl apply -f $$tag-deployment.yaml --force; \
 		cd $$CURRENT; \
 	done
+k8s-apply-test-deployment:
+	cd "wlsm-insomnia-test"; \
+	kubectl apply -f test-deployment.yaml --force; \
+	cd ..
 k8s-restart-pods:
 	kubectl delete pods --all -n wlsm-namespace
 k8s-tear-aggregator-down:
@@ -108,6 +112,9 @@ k8s-tear-down:
 		kubectl delete -f $$tag-deployment.yaml --ignore-not-found=true; \
 		cd $$CURRENT; \
 	done
+	cd "wlsm-insomnia-test"; \
+	kubectl delete -f test-deployment.yaml --ignore-not-found=true; \
+	cd ..
 k8s-ubuntu-shell:
 	kubectl exec --stdin --tty wlsm-listener-deployment  -- /bin/bash
 
@@ -171,6 +178,12 @@ update: remove-lock-files
  		yarn
 insomnia-tests:
 	echo | inso run test --src insomnia/Insomnia.json --verbose --env "OpenAPI env 0.0.0.0:8082"
+insomnia-build-update:
+	cd "wlsm-insomnia-test"; \
+	docker rmi localhost:5001/wlsm-insomnia-test; \
+	docker build . --tag localhost:5001/wlsm-insomnia-test; \
+	docker push localhost:5001/wlsm-insomnia-test; \
+	cd ..
 insomnia-start-test-pod:
 	cd "wlsm-insomnia-test"; \
 	docker build . --tag localhost:5001/wlsm-insomnia-test; \

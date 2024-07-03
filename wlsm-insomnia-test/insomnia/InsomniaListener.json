@@ -1,0 +1,185 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2024-07-03T09:29:53.997Z",
+  "__export_source": "insomnia.desktop.app:v9.3.1",
+  "resources": [
+    {
+      "_id": "req_c90ccbbf80a4441089d6fcb1d5bfeb34",
+      "parentId": "wrk_fca2db5019a94631b8c0b43945925aaa",
+      "modified": 1719938349390,
+      "created": 1719938290641,
+      "url": "http://wlsm-aggregator-deployment.wlsm-namespace.svc.cluster.local:8082/api/v1/aggregator/animal",
+      "name": "GET latest animal",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/9.3.1"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1719938290641,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_fca2db5019a94631b8c0b43945925aaa",
+      "parentId": null,
+      "modified": 1719938045853,
+      "created": 1719938045853,
+      "name": "wild_life_safety_monitor API - listener 1.0.0",
+      "description": "",
+      "scope": "design",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_e24fe356030f424687f147d1b3b11bd0",
+      "parentId": "wrk_fca2db5019a94631b8c0b43945925aaa",
+      "modified": 1719938080165,
+      "created": 1719938080165,
+      "url": "{{ _.base_url }}/info",
+      "name": "GET info",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1719938080165,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_6b043ab2f0034f2bb1266ccaab3134e1",
+      "parentId": "wrk_fca2db5019a94631b8c0b43945925aaa",
+      "modified": 1719938417149,
+      "created": 1719938080165,
+      "url": "{{ _.base_url }}/create",
+      "name": "POST create",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"animalId\": \"{% response 'body', 'req_c90ccbbf80a4441089d6fcb1d5bfeb34', 'b64::JFswXS5pZA==::46b', 'never', 60 %}\",\n  \"latitude\": {% faker 'randomInt' %},\n  \"longitude\": {% faker 'randomInt' %}\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "disabled": false,
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1719938080165,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_a595342611b53d2ba977bbb9d3f9c1342a92daa7",
+      "parentId": "wrk_fca2db5019a94631b8c0b43945925aaa",
+      "modified": 1719938120862,
+      "created": 1719938072607,
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://wlsm-listener-deployment.wlsm-namespace.svc.cluster.local:8080/app/v1/listener"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "base_url"
+        ]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1719938072607,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_a595342611b53d2ba977bbb9d3f9c1342a92daa7",
+      "parentId": "wrk_fca2db5019a94631b8c0b43945925aaa",
+      "modified": 1719938072608,
+      "created": 1719938072608,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "spc_799906dc128542ad86400387b3e320e8",
+      "parentId": "wrk_fca2db5019a94631b8c0b43945925aaa",
+      "modified": 1719938045887,
+      "created": 1719938045858,
+      "fileName": "wild_life_safety_monitor API - listener 1.0.0",
+      "contents": "openapi: \"3.0.3\"\ninfo:\n  title: \"wild_life_safety_monitor API - listener\"\n  description: \"wild_life_safety_monitor API\"\n  version: \"1.0.0\"\nservers:\n  - url: \"http://wlsm-listener-deployment.wlsm-namespace.svc.cluster.local:8080/app/v1/listener\"\npaths:\n  /info:\n    get:\n      summary: \"GET info\"\n      operationId: \"info\"\n      responses:\n        \"200\":\n          description: \"OK\"\n          content:\n            '*/*':\n              schema:\n                type: \"string\"\n  /create:\n    post:\n      summary: \"POST create\"\n      operationId: \"sendAnimalLocation\"\n      requestBody:\n        content:\n          application/json:\n            schema:\n              $ref: \"#/components/schemas/AnimalLocationDto\"\n        required: true\n      responses:\n        \"200\":\n          description: \"OK\"\n          content:\n            '*/*':\n              schema:\n                $ref: \"#/components/schemas/AnimalLocationDto\"\ncomponents:\n  schemas:\n    AnimalLocationDto:\n      type: \"object\"\n      properties:\n        animalId:\n          type: \"string\"\n        latitude:\n          type: \"integer\"\n          format: \"int64\"\n        longitude:\n          type: \"integer\"\n          format: \"int64\"",
+      "contentType": "yaml",
+      "_type": "api_spec"
+    },
+    {
+      "_id": "uts_01c1706c0e2f4380a27b81df22fcc5b0",
+      "parentId": "wrk_fca2db5019a94631b8c0b43945925aaa",
+      "modified": 1719938524599,
+      "created": 1719938513397,
+      "name": "Listener Test Suite",
+      "metaSortKey": -1719938513397,
+      "_type": "unit_test_suite"
+    },
+    {
+      "_id": "env_d2a808eb17214086841b758c4bfa5d04",
+      "parentId": "env_a595342611b53d2ba977bbb9d3f9c1342a92daa7",
+      "modified": 1719998923222,
+      "created": 1719938080164,
+      "name": "OpenAPI env wlsm-listener-deployment.wlsm-namespace.svc.cluster.local:8080",
+      "data": {
+        "scheme": "http",
+        "base_path": "/app/v1/listener",
+        "host": "wlsm-listener-deployment.wlsm-namespace.svc.cluster.local:8080",
+        "base_url": "http://wlsm-listener-deployment.wlsm-namespace.svc.cluster.local:8080/app/v1/listener"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "scheme",
+          "base_path",
+          "host",
+          "base_url"
+        ]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1719938080164,
+      "_type": "environment"
+    },
+    {
+      "_id": "ut_9e6bb187eeda4664b7cedf9b154fdd26",
+      "parentId": "uts_01c1706c0e2f4380a27b81df22fcc5b0",
+      "modified": 1719938531308,
+      "created": 1719938526717,
+      "requestId": "req_6b043ab2f0034f2bb1266ccaab3134e1",
+      "name": "Returns 200",
+      "code": "const response1 = await insomnia.send();\nexpect(response1.status).to.equal(200);",
+      "metaSortKey": -1719938526716,
+      "_type": "unit_test"
+    }
+  ]
+}

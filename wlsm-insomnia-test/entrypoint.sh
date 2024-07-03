@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
-./install-insomnia-linux.sh
-./install-inso.linux.sh
-./install-all-linux.sh
+for i in {1..10}
+do
+  echo | inso run test --src InsomniaListener.json --verbose --env "OpenAPI env wlsm-listener-deployment.wlsm-namespace.svc.cluster.local:8080"
+done
 echo | inso run test --src Insomnia.json --verbose --env "OpenAPI env wlsm-aggregator-deployment.wlsm-namespace.svc.cluster.local:8082"
