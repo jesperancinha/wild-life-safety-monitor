@@ -35,9 +35,10 @@ install-all:
 remove-all-cluster:
 	if [ -f ~/.kube/config ]; then mv ~/.kube/config ~/.kube/config.backup; fi
 	if [ -d ~/.kube/cache ]; then rm -r ~/.kube/cache; fi
-	kind delete clusters --all
+	if [ -f /usr/local/bin/kind ]; then kind delete clusters --all; fi
+reset-system: remove-all-cluster remove-all-cluster uninstall-all stop-remove-registry
 uninstall-all:
-	kind delete clusters --all
+	if [ -f /usr/local/bin/kind ]; then kind delete clusters --all; fi
 	if [ -f /usr/local/bin/kind ]; then sudo rm /usr/local/bin/kind; fi
 	if [ -d ~/kuma-* ]; then sudo rm -r ~/kuma-*; fi
 	sudo apt remove kubelet kubeadm kubectl helm
