@@ -6,7 +6,7 @@ on:
       - '**'
 
 jobs:
-  build:
+  integration-test-insomnia:
 
     runs-on: ubuntu-latest
 
