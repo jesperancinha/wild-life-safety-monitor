@@ -9,3 +9,6 @@ VALUES ('Albatross', (SELECT id FROM families LIMIT 1), (SELECT id FROM genuses 
 
 INSERT INTO animal(name, species_id)
 VALUES ('Piquinho', (SELECT id from species LIMIT 1));
+
+INSERT INTO animal(id, name, species_id)
+VALUES ('52073642-392c-11ef-b6c4-0bae65032803', 'Test Piquinho', (SELECT id from species LIMIT 1));

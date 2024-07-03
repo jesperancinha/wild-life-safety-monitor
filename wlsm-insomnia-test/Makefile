@@ -5,3 +5,6 @@ run-container:
 	docker rm test-container
 	docker build -t test .
 	docker run -d --name test-container test
+
+run-local-tests:
+	local/entrypoint.sh

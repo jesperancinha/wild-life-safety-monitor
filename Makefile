@@ -180,13 +180,13 @@ insomnia-tests:
 	echo | inso run test --src insomnia/Insomnia.json --verbose --env "OpenAPI env 0.0.0.0:8082"
 insomnia-build-update:
 	cd "wlsm-insomnia-test"; \
-	docker rmi localhost:5001/wlsm-insomnia-test; \
-	docker build . --tag localhost:5001/wlsm-insomnia-test; \
+#	docker rmi localhost:5001/wlsm-insomnia-test; \
+	docker build --no-cache . --tag localhost:5001/wlsm-insomnia-test; \
 	docker push localhost:5001/wlsm-insomnia-test; \
 	cd ..
 insomnia-start-test-pod:
 	cd "wlsm-insomnia-test"; \
-	docker build . --tag localhost:5001/wlsm-insomnia-test; \
+	docker build --no-cache  . --tag localhost:5001/wlsm-insomnia-test; \
 	docker push localhost:5001/wlsm-insomnia-test; \
 	kubectl apply -f test-deployment.yaml --force; \
 	cd ..
