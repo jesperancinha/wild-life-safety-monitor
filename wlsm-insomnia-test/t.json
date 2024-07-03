@@ -1,0 +1,73 @@
+{
+  "conditions": [
+    {
+      "lastProbeTime": null,
+      "lastTransitionTime": "2024-07-03T13:50:59Z",
+      "status": "False",
+      "type": "PodReadyToStartContainers"
+    },
+    {
+      "lastProbeTime": null,
+      "lastTransitionTime": "2024-07-03T13:50:51Z",
+      "reason": "PodCompleted",
+      "status": "True",
+      "type": "Initialized"
+    },
+    {
+      "lastProbeTime": null,
+      "lastTransitionTime": "2024-07-03T13:50:58Z",
+      "reason": "PodCompleted",
+      "status": "False",
+      "type": "Ready"
+    },
+    {
+      "lastProbeTime": null,
+      "lastTransitionTime": "2024-07-03T13:50:58Z",
+      "reason": "PodCompleted",
+      "status": "False",
+      "type": "ContainersReady"
+    },
+    {
+      "lastProbeTime": null,
+      "lastTransitionTime": "2024-07-03T13:50:51Z",
+      "status": "True",
+      "type": "PodScheduled"
+    }
+  ],
+  "containerStatuses": [
+    {
+      "containerID": "containerd://85bcc276c3c7db8cbb2903aecdc6fd08d6574ae8372361752fdc3ccf5bcc9696",
+      "image": "localhost:5001/wlsm-insomnia-test:latest",
+      "imageID": "localhost:5001/wlsm-insomnia-test@sha256:86079a6c561c777122a502bbf1d8636ad19d9e71f1011d89ebfee12b5823fe29",
+      "lastState": {},
+      "name": "wlsm-insomnia-test",
+      "ready": false,
+      "restartCount": 0,
+      "started": false,
+      "state": {
+        "terminated": {
+          "containerID": "containerd://85bcc276c3c7db8cbb2903aecdc6fd08d6574ae8372361752fdc3ccf5bcc9696",
+          "exitCode": 0,
+          "finishedAt": "2024-07-03T13:50:57Z",
+          "reason": "Completed",
+          "startedAt": "2024-07-03T13:50:51Z"
+        }
+      }
+    }
+  ],
+  "hostIP": "172.19.0.3",
+  "hostIPs": [
+    {
+      "ip": "172.19.0.3"
+    }
+  ],
+  "phase": "Succeeded",
+  "podIP": "10.244.0.83",
+  "podIPs": [
+    {
+      "ip": "10.244.0.83"
+    }
+  ],
+  "qosClass": "BestEffort",
+  "startTime": "2024-07-03T13:50:51Z"
+}
