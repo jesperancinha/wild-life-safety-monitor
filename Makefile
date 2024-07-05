@@ -98,6 +98,7 @@ k8s-apply-deployment:
 		kubectl apply -f $$tag-deployment.yaml --force; \
 		cd $$CURRENT; \
 	done
+	./wlsm-wait.sh
 k8s-apply-test-deployment:
 	cd "wlsm-insomnia-test"; \
 	kubectl apply -f test-deployment.yaml --force; \

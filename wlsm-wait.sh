@@ -25,7 +25,8 @@ while : ; do
     break
   else
     echo "Waiting for the following pods to be ready:"
-    echo "$NOT_READY_PODS" | jq -r '. | @csv'  # Print in a readable CSV format
+    result=$(echo "$NOT_READY_PODS"| grep -E "wlsm\-[a-z]*\-[a-z0-9\-]*.*,")
+    echo "$result"
     sleep 1
   fi
 done
