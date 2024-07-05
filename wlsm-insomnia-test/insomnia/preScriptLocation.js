@@ -1,6 +1,5 @@
 const baseUrl = insomnia.environment.get('base_url');
 console.log('Base URL:', baseUrl);
-console.log('Oh nanana!', 'Love me');
 
 const rawReq1 = {
     url: "http://localhost:8082/api/v1/aggregator/animal",
