@@ -36,7 +36,7 @@ remove-all-cluster:
 	if [ -f ~/.kube/config ]; then mv ~/.kube/config ~/.kube/config.backup; fi
 	if [ -d ~/.kube/cache ]; then rm -r ~/.kube/cache; fi
 	if [ -f /usr/local/bin/kind ]; then kind delete clusters --all; fi
-reset-system: remove-all-cluster remove-all-cluster uninstall-all stop-remove-registry
+reset-system: remove-all-cluster remove-images uninstall-all stop-remove-registry
 uninstall-all:
 	if [ -f /usr/local/bin/kind ]; then kind delete clusters --all; fi
 	if [ -f /usr/local/bin/kind ]; then sudo rm /usr/local/bin/kind; fi
@@ -64,9 +64,11 @@ build-gradle:
 k8s-init: remove-all-cluster b create-cluster create-local-registry create-and-push-images k8s-apply-deployment k8s-wait
 k8s-wait:
 	./wlsm-wait.sh
-create-and-push-images: k8s-tear-down
+remove-images:
+	docker images "*/*wlsm*" --format '{{.ID}}' | xargs -I {}  docker rmi {}
+create-and-push-images: k8s-tear-down remove-images
 	#docker images -f "dangling=true" -q | xargs -I {}  docker rmi {}
-	docker images "*/*wlsm*" --format '{{.Repository}}' | xargs -I {}  docker rmi {}
+
 	@for tag in $(MODULE_TAGS); do \
 		export CURRENT=$(shell pwd); \
 		echo "Building Image $$image..."; \
