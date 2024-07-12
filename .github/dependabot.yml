@@ -17,6 +17,8 @@ updates:
           - "proto*"
           - "*proto*"
           - "*grpc.*"
+          - "*grpc*"
+          - "grpc*"
 
   - package-ecosystem: "npm"
     directory: "wlsm-messenger-frontend"
