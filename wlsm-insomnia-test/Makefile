@@ -1,8 +1,8 @@
 include ../Makefile.mk
 
 run-container:
-	docker stop test-container
-	docker rm test-container
+	docker ps --format '{{.ID}}' -q --filter="name=/test-container"| xargs -I {} docker stop {}
+	docker ps --format '{{.ID}}' -q --filter="name=/test-container"| xargs -I {} docker rm {}
 	docker build -t test .
 	docker run -d --name test-container test
 
