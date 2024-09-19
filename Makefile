@@ -56,13 +56,6 @@ build-gradle:
 	export GRADLE_VERSION=$(GRADLE_VERSION) ;\
 	gradle wrapper --no-validate-url --gradle-version $(GRADLE_VERSION); \
 	./gradlew build test
-	@for location in $(MODULE_LOCATIONS); do \
-		export CURRENT=$(shell pwd); \
-		echo "Building $$location..."; \
-		cd $$location; \
-		make b; \
-		cd $$CURRENT; \
-	done
 k8s-init: remove-all-cluster b create-cluster create-local-registry create-and-push-images k8s-apply-deployment k8s-wait
 k8s-wait:
 	./wlsm-wait.sh
