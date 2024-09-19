@@ -54,7 +54,8 @@ setup-kuma:
 buildw: build-gradle
 build-gradle:
 	export GRADLE_VERSION=$(GRADLE_VERSION) ;\
-	gradle wrapper --no-validate-url --gradle-version $(GRADLE_VERSION) build; \
+	gradle wrapper --gradle-version $(GRADLE_VERSION); \
+	./gradlew build
 	./gradlew test
 k8s-init: remove-all-cluster b create-cluster create-local-registry create-and-push-images k8s-apply-deployment k8s-wait
 k8s-wait:
