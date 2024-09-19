@@ -28,7 +28,7 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
 	api(libs.spring.boot.starter.data.r2dbc)
-	implementation("org.postgresql:r2dbc-postgresql")
+	api(libs.r2dbc.postgresql)
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 	runtimeOnly("org.postgresql:postgresql")
