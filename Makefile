@@ -10,6 +10,8 @@ MODULE_TAGS := aggregator \
 			   management \
 			   database
 b: buildw
+wrapper:
+	gradle wrapper --gradle-version $(GRADLE_VERSION)
 build-research:
 	cd wlsm-messenger-pre-service; \
 	make install-protobuf; \
