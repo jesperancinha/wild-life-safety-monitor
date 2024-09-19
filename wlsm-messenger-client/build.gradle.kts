@@ -10,12 +10,6 @@ repositories {
     mavenCentral()
 }
 
-val gradleSysVersion = System.getenv("GRADLE_VERSION")
-
-tasks.register<Wrapper>("wrapper") {
-    gradleVersion =  gradleSysVersion
-}
-
 dependencies {
     protobuf(project(":wlsm-messenger-protos"))
     api(libs.grpc.protobuf)
