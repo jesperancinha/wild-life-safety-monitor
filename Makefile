@@ -54,8 +54,11 @@ setup-kuma:
 buildw: build-gradle
 build-gradle:
 	export GRADLE_VERSION=$(GRADLE_VERSION) ;\
-	gradle wrapper --no-validate-url --gradle-version $(GRADLE_VERSION); \
-	./gradlew build test
+	gradle wrapper --gradle-version $(GRADLE_VERSION); \
+	./gradlew --stop; \
+	./gradlew build; \
+	./gradlew --stop; \
+	./gradlew test
 k8s-init: remove-all-cluster b create-cluster create-local-registry create-and-push-images k8s-apply-deployment k8s-wait
 k8s-wait:
 	./wlsm-wait.sh

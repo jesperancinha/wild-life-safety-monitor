@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -26,8 +27,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
-	implementation("org.springframework.boot:spring-boot-starter-data-r2dbc:3.3.3")
-	implementation("org.postgresql:r2dbc-postgresql:1.0.5.RELEASE")
+	api(libs.spring.boot.starter.data.r2dbc)
+	api(libs.r2dbc.postgresql)
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 	runtimeOnly("org.postgresql:postgresql")
@@ -36,9 +37,9 @@ dependencies {
 }
 
 tasks.withType<KotlinCompile> {
-	kotlinOptions {
-		freeCompilerArgs += "-Xjsr305=strict"
-		jvmTarget = "21"
+	compilerOptions {
+		jvmTarget.set(JvmTarget.JVM_21)
+		freeCompilerArgs.add("-Xjsr305=strict")
 	}
 }
 
