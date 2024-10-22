@@ -8,10 +8,11 @@ updates:
       kotlin:
         patterns:
           - "org.jetbrains.kotlin.*"
-      jupiter:
+      junit:
         patterns:
-          - "junit-jupiter"
-          - "junit-jupiter*"
+          - "junit"
+          - "junit*"
+          - "*junit*"
       proto-grpc:
         patterns:
           - "proto*"
