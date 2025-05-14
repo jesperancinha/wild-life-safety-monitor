@@ -16,10 +16,10 @@ jobs:
           with:
             java-version: '21'
             distribution: 'adopt'
-        - name: Setup Gradle 8.10.1
+        - name: Setup Gradle 8.14
           uses: gradle/gradle-build-action@v3
           with:
-            gradle-version: 8.10.1
+            gradle-version: 8.14
 
         - name: All Build
           run: make
