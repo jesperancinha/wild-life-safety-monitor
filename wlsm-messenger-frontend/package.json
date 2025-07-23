@@ -5,7 +5,7 @@
   "main": "client.js",
   "devDependencies": {
     "@grpc/grpc-js": "~1.13.0",
-    "@grpc/proto-loader": "~0.7.13",
+    "@grpc/proto-loader": "~0.8.0",
     "async": "~3.2.5",
     "google-protobuf": "~3.21.2",
     "grpc-web": "~1.5.0",
