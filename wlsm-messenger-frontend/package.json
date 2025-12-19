@@ -10,7 +10,7 @@
     "google-protobuf": "~4.0.0",
     "grpc-web": "~2.0.0",
     "lodash": "~4.17.0",
-    "webpack": "~5.103.0",
+    "webpack": "~5.104.1",
     "webpack-cli": "~6.0.0"
   }
 }
