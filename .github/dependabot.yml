@@ -3,7 +3,7 @@ updates:
   - package-ecosystem: "gradle"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "yearly"
     groups:
       kotlin:
         patterns:
@@ -24,7 +24,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "wlsm-messenger-frontend"
     schedule:
-      interval: "daily"
+      interval: "yearly"
     groups:
       angular:
         patterns:
@@ -45,7 +45,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "wslm-gui"
     schedule:
-      interval: "daily"
+      interval: "yearly"
     groups:
       angular:
         patterns:
